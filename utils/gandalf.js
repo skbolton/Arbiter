@@ -2,18 +2,18 @@ const detect = require('type-detect')
 
 const checkType = (thing, expected, context) => {
   const detected = detect(thing)
-    if (detected !== expected) {
-      throw new TypeError(
+  if (detected !== expected) {
+    throw new TypeError(
         `${context} is expecting ${expected}. Instead got: ${detected}.`
       )
-    }
+  }
 }
 
 const checkIsa = (thing, parent, context) => {
   const isInstance = thing instanceof parent
-    if (!isInstance) {
-      throw new TypeError(`${context} needs to be instance of ${parent}`)
-    } 
+  if (!isInstance) {
+    throw new TypeError(`${context} needs to be instance of ${parent}`)
+  }
 }
 
 const asyncCheckType = (...args) => {
@@ -39,6 +39,6 @@ module.exports = {
   checkIsa,
   async: {
     checkType: asyncCheckType,
-    checkisa: asyncCheckType
+    checkisa: asyncCheckIsa
   }
-} 
+}

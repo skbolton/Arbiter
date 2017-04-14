@@ -4,17 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./**/*.test.js"
+    "test": "standard && mocha",
+    "posttest": "rimraf .nyc_output",
+    "coverage": "nyc mocha",
+    "fix": "standard --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "standard": {
+    "env": "mocha"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "nyc": "^10.2.0",
+    "rimraf": "^2.6.1",
+    "standard": "^10.0.2",
+    "testdouble": "^2.1.2"
   },
   "dependencies": {
+    "dot-prop": "^4.1.1",
     "type-detect": "^4.0.0"
   }
 }
