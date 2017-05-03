@@ -200,6 +200,8 @@ Model
     status: { not: null }
   })
   .explain()
+  .exec()
+  //...
 
   // logs
   // {
@@ -221,14 +223,14 @@ Model
   .RAW('Select First_Name__c FROM Lead')
   .then(data => data.records)
   .then(response => {
-    // { First_Name__c: 'Jane Doe' }
+    // [{ First_Name__c: 'Jane Doe' }]
   })
 ```
 
 ### `Model.query(query)`
 * `query` (String) - query to execute
 
-Very similar to `Model.RAW(query)` except this will run the response through all of Arbiters mapping and return a Document instance.
+Very similar to `Model.RAW(query)` except this will run the response through all of Arbiter's mapping and return a Document instance. This is useful if you already have a query string and don't need any of Arbiter's `.fields()` or `.where()` API.
 
 ```js
 Model
