@@ -1,5 +1,7 @@
 const detect = require('type-detect')
 
+const getType = (thing) => detect(thing)
+
 const checkType = (thing, expected, context) => {
   const detected = detect(thing)
   if (detected !== expected) {
@@ -16,7 +18,7 @@ const checkIsa = (thing, parent, context) => {
   }
 }
 
-const asyncCheckType = (...args) => {
+const checkTypeAsync = (...args) => {
   try {
     checkType(...args)
     return Promise.resolve()
@@ -25,7 +27,7 @@ const asyncCheckType = (...args) => {
   }
 }
 
-const asyncCheckIsa = (...args) => {
+const checkIsaAsync = (...args) => {
   try {
     checkIsa(...args)
     return Promise.resolve()
@@ -35,10 +37,9 @@ const asyncCheckIsa = (...args) => {
 }
 
 module.exports = {
+  getType,
   checkType,
   checkIsa,
-  async: {
-    checkType: asyncCheckType,
-    checkisa: asyncCheckIsa
-  }
+  checkTypeAsync,
+  checkIsaAsync
 }
