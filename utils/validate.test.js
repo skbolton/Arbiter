@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const validate = require('./validate')
 
-describe('type type checking', () => {
+describe('validate type checking', () => {
   describe('#checkType(thing, expected, context)', () => {
     it('should throw error if thing is not type expected', () => {
       function shouldThrow () {
