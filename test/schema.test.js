@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 
-const Schema = require('./schema')
+const Schema = require('../lib/schema/schema')
 
 describe('Schema', () => {
   let schema

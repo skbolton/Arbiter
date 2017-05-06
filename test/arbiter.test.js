@@ -1,20 +1,30 @@
 const { expect } = require('chai')
 
-const Arbiter = require('./arbiter')
-const Schema = require('./schema/schema')
+const Arbiter = require('../lib/arbiter')
+const Schema = require('../lib/schema/schema')
 
 describe('Class Arbiter', () => {
   let arbiter
+  let Opportunity
+  const goodSchema1 = new Schema('Opportunity', {})
+  const goodSchema2 = new Schema('Service__r', {})
 
-  beforeEach(() => { arbiter = new Arbiter() })
-  afterEach(() => { arbiter = null })
+  beforeEach(() => {
+    arbiter = new Arbiter()
+    Opportunity = arbiter.model('Opportunity', goodSchema1)
+    arbiter.model('Service', goodSchema2)
+  })
+
+  afterEach(() => {
+    arbiter = null
+  })
 
   it('should return an object', () => {
     expect(arbiter).to.be.an('object')
   })
 
-  it('should have `_models` property', () => {
-    expect(arbiter).to.haveOwnProperty('_models')
+  it('should not expose its models', () => {
+    expect(arbiter).to.not.haveOwnProperty('_models')
   })
 
   it('should have a `pool` property', () => {
@@ -67,14 +77,11 @@ describe('Class Arbiter', () => {
     })
 
     it('should add `name` to `arbiter._models`', () => {
-      arbiter.model('Opportunity', goodSchema)
-
-      expect(arbiter._models.Opportunity).to.be.an('object')
+      const modelExists = arbiter.getModel('Opportunity')
+      expect(modelExists).to.be.an('object')
     })
 
     it('should throw error if user adds model with same name again', () => {
-      arbiter.model('Opportunity', goodSchema)
-
       function shouldThrow () {
         arbiter.model('Opportunity', goodSchema)
       }
@@ -83,25 +90,11 @@ describe('Class Arbiter', () => {
     })
 
     it('should return an object', () => {
-      const Opportunity = arbiter.model('Opportunity', goodSchema)
-
       expect(Opportunity).to.be.an('object')
-    })
-
-    specify('object should have access to `arbiter.pool`', () => {
-      const Opportunity = arbiter.model('Opportunity', goodSchema)
-
-      expect(Opportunity.pool).to.equal(arbiter.pool)
     })
   })
 
   describe('#getModels()', () => {
-    const arbiter = new Arbiter()
-    const goodSchema1 = new Schema('Opportunity', {})
-    const goodSchema2 = new Schema('Service__c', {})
-    arbiter.model('Opportunity', goodSchema1)
-    arbiter.model('Service', goodSchema2)
-
     it('should return models that have been registered', () => {
       const actual = arbiter.getModels()
 
@@ -115,7 +108,7 @@ describe('Class Arbiter', () => {
       const actual = arbiter.getModel('Opportunity')
       const notRegistered = arbiter.getModel('NotHere')
 
-      expect(actual).to.equal(arbiter._models.Opportunity)
+      expect(actual).to.equal(Opportunity)
       expect(notRegistered).to.not.be.an('object')
     })
   })

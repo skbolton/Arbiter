@@ -1,8 +1,8 @@
 const { expect } = require('chai')
 const td = require('testdouble')
 
-const Arbiter = require('../arbiter')
-const Schema = require('../schema/schema')
+const Arbiter = require('../lib/arbiter')
+const Schema = require('../lib/schema/schema')
 const firstSchema = new Schema('Schema', {
   name: 'Name',
   noAerialPhoto: {
@@ -24,51 +24,29 @@ const firstSchema = new Schema('Schema', {
   }
 })
 
-const secondSchema = new Schema('Schema2', {
-  parentId: {
-    sf: 'ParentId',
-    rel: 'Schema'
-  }
-})
-
-const queryResult = {
-  attributes: {
-    whatever: 'this is metadata from sf that gets deleted'
-  },
-  Id: 1,
-  Name: 'Some Name',
-  // leaving of No_Aerial_Photo__c on purpose
-  Project__r: {
-    Name: 'Some Child Name'
-    // leaving proposalCAD off on purpose
-  }
-}
-
 describe('Model', () => {
   let arbiter
   let Model
-  let Model2
 
   beforeEach(() => {
     arbiter = new Arbiter()
     Model = arbiter.model('Model', firstSchema)
-    Model2 = arbiter.model('Model2', secondSchema)
   })
   afterEach(() => { Model = null })
 
-  it('should have property `__schema`', () => {
-    expect(Model).to.haveOwnProperty('__schema')
-  })
-
-  it('should have property `_fields`', () => {
+  it('should have a `_fields` property', () => {
     expect(Model).to.haveOwnProperty('_fields')
   })
 
-  it('should have property `_where`', () => {
+  it('should have a `_where` property', () => {
     expect(Model).to.haveOwnProperty('_where')
   })
 
-  it('should have property `_with`', () => {
+  it('should have a `_mappings` property', () => {
+    expect(Model).to.haveOwnProperty('_mappings')
+  })
+
+  it('should have a `_with` property', () => {
     expect(Model).to.haveOwnProperty('_with')
   })
 
@@ -404,7 +382,7 @@ describe('Model', () => {
     })
   })
 
-  describe('#exec()', () => {
+  xdescribe('#exec()', () => {
     it('should be a function', () => {
       expect(Model).to.respondTo('exec')
     })
@@ -439,102 +417,9 @@ describe('Model', () => {
     })
   })
 
-  describe('#doc()', () => {
+  describe('#createGrunts()', () => {
     it('should be a function', () => {
-      expect(Model).to.respondTo('doc')
-    })
-
-    it('should return an object', () => {
-      expect(Model.doc({})).to.be.an('object')
-    })
-
-    specify('object should have a `_changeset` property', () => {
-      const doc = Model.doc({})
-
-      expect(doc).to.haveOwnProperty('__changeset')
-    })
-
-    it('should add values to `_changset` when they are changed', () => {
-      // needed to build up fields on model
-      Model
-        .fields('name', 'noAerialPhoto', 'project', 'project.proposalCAD')
-        .buildQuery()
-
-      const result = Model.mapResult(queryResult)
-      const doc = Model.doc(result)
-
-      doc.noAerialPhoto = true
-      expect(doc.__changeset).to.haveOwnProperty('No_Aerial_Photo__c')
-    })
-  })
-
-  describe('#buildQuery()', () => {
-    it('should be a function', () => {
-      expect(Model).to.respondTo('buildQuery')
-    })
-
-    it('should build query based of `model._fields`', () => {
-      Model.fields('name', 'project', 'project.proposalCAD')
-
-      // The buildQuery might add spaces to the end of the string
-      const actual = Model.buildQuery().trim()
-      const expected = 'SELECT Id, Name, Project__r.Id, Project__r.Name, Project__r.Proposal_CAD__r.Id, Project__r.Proposal_CAD__r.Proposal_Completed__c FROM Schema'
-      expect(actual).to.equal(expected)
-    })
-
-    it('should build query off of `model._where`', () => {
-      Model
-        .fields('name', 'project', 'project.proposalCAD')
-        .where({
-          id: [1, 2, 3, 4],
-          name: 'O-5489',
-          service: { notlike: '%hi' },
-          project: { not: null },
-          'project.proposalCAD.proposalCompleted': { like: '%whatever%' },
-          'project.name': { not: null },
-          noAerialPhoto: null
-        })
-
-      const actual = Model.buildQuery()
-      const expected = "SELECT Id, Name, Project__r.Id, Project__r.Name, Project__r.Proposal_CAD__r.Id, Project__r.Proposal_CAD__r.Proposal_Completed__c FROM Schema WHERE Id IN ('1', '2', '3', '4') AND Name = 'O-5489' AND (NOT Service__r LIKE '%hi') AND Project__r != null AND Project__r.Proposal_CAD__r.Proposal_Completed__c LIKE '%whatever%' AND Project__r.Name != null AND No_Aerial_Photo__c = null"
-      expect(actual).to.equal(expected)
-    })
-  })
-
-  describe('#getResultSkeleton()', () => {
-    it('should build up a result object based on Model._fields', () => {
-      Model
-        .find()
-        .fields('name', 'project', 'project.proposalCAD.proposalCompleted')
-
-      // expected shape
-      // {
-      //   id: undefined,
-      //   name: undefined,
-      //   project: {
-      //     name: undefined,
-      //     proposalCAD: {
-      //       proposalCompleted: undefined
-      //     }
-      //   }
-      // }
-      const actual = Model.getResultSkeleton()
-      expect(Object.keys(actual)).to.include.members(['id', 'name', 'project'])
-      expect(actual.project.proposalCAD).to.have.haveOwnProperty('proposalCompleted')
-    })
-  })
-
-  describe('#mapResult(result)', () => {
-    it('should return mapped object based off `Model._fields`', () => {
-      Model
-        .fields('name', 'noAerialPhoto', 'project', 'project.proposalCAD')
-        .buildQuery()
-      const mappedResults = Model.mapResult(queryResult)
-
-      expect(mappedResults.name).to.equal('Some Name')
-      expect(mappedResults.noAerialPhoto).to.equal(null)
-      expect(mappedResults.project.name).to.equal('Some Child Name')
-      expect(mappedResults.project.proposalCAD).to.be.an('object')
+      expect(Model).to.respondTo('createGrunts')
     })
   })
 
@@ -581,15 +466,6 @@ describe('Model', () => {
       const returned = Model.explain()
 
       expect(returned).to.equal(Model)
-    })
-  })
-
-  describe('#getRelField(object)', () => {
-    it('should return relation field one model has to a `object`', () => {
-      const expected = 'parentId'
-      const actual = Model2.getRelField('Schema')
-
-      expect(actual).to.equal(expected)
     })
   })
 })
