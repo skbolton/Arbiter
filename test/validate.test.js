@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const validate = require('./validate')
+const validate = require('../lib/utils/validate')
 
 describe('validate type checking', () => {
   describe('#checkType(thing, expected, context)', () => {

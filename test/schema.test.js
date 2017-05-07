@@ -134,36 +134,4 @@ describe('Schema Class', () => {
       expect(shouldThrow2).to.throw(Error)
     })
   })
-
-  describe('#createWritablesProxy()', () => {
-    it('should return an object', () => {
-      const returned = lineItemsSchema.createWritablesProxy()
-
-      expect(returned).to.be.an('object')
-    })
-    it('should add a Proxy handler object to schema', () => {
-      lineItemsSchema.createWritablesProxy()
-
-      expect(lineItemsSchema).to.haveOwnProperty('writablesProxy')
-    })
-
-    it('should add all writable keys to `schema.writablesProxy`', () => {
-      lineItemsSchema.createWritablesProxy()
-
-      const writableKeys = [
-        'createdById',
-        'createdOn',
-        'productCode'
-      ]
-      const { writables } = lineItemsSchema.writablesProxy
-
-      expect(writables).to.have.all.keys(...writableKeys)
-    })
-
-    it('should have a set function on returned object', () => {
-      const returned = oppSchema.createWritablesProxy()
-
-      expect(returned).to.respondTo('set')
-    })
-  })
 })

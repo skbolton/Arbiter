@@ -145,8 +145,14 @@ Model
     field: { notlike: '%should not match this%' }
     field: [ 'in', 'one', 'of', 'these' ],
     field: { not: [ 'not', 'in', 'one', 'of', 'these' ] },
+    // comparison operators
+    field: { gt: 'something', lt: 'something', gte: 'something', lte: 'something' },
     // filter off nested values is allowed
+    // pass multiple clauses for a field
+    field: { not: null, gte: 5, like: '%something' },
     'field.nested.name': 'all of the above work here'
+    // for things that arbiter's api doesn't cover you can pass field RAW with a raw string to add to where clauses
+    RAW: 'RAW QUERY STRING'
   })
 ```
 

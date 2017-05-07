@@ -250,5 +250,11 @@ describe('Model', () => {
 
       expect(actual).to.equal(expected)
     })
+
+    it('should return undefined if relation doesn\'t exist', () => {
+      const actual = Model2.getRelField('hotdog')
+
+      expect(actual).to.equal(undefined)
+    })
   })
 })

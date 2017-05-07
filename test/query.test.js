@@ -4,6 +4,10 @@ const Query = require('../lib/model/query')
 const Arbiter = require('../lib/arbiter')
 const arbiter = new Arbiter()
 const { oppSchema } = require('./fixtures/schema')
+const {
+  missingProject,
+  multipleQueryResults
+} = require('./fixtures/queryResult')
 
 const Opportunity = arbiter.model('Opportunity', oppSchema)
 
@@ -151,7 +155,7 @@ describe('Query Class', () => {
       expect(shouldThrow).to.throw(Error)
     })
 
-    it('should add `opts` keys to `model._where`', () => {
+    it('should add `opts` keys to `query._where`', () => {
       query.where({
         status: 'Open'
       })
@@ -160,7 +164,7 @@ describe('Query Class', () => {
       expect(status).to.equal('Open')
     })
 
-    it('should keep old keys on `model._where`', () => {
+    it('should keep old keys on `query._where`', () => {
       query.where({
         name: 'something'
       })
@@ -207,9 +211,34 @@ describe('Query Class', () => {
     })
   })
 
-  describe('#createGrunts()', () => {
+  describe('#createGruntSkeletons()', () => {
     it('should be a function', () => {
-      expect(query).to.respondTo('createGrunts')
+      expect(query).to.respondTo('createGruntSkeletons')
+    })
+
+    it('should create a skeleton for every query result', () => {
+      query
+        .fields('name', 'noAerialPhoto', 'project', 'service')
+
+      const returned = query.createGruntSkeletons(multipleQueryResults)
+
+      expect(returned).to.have.length(2)
+    })
+  })
+
+  describe('#formatSkeleton(queryResult)', () => {
+    it('should be a function', () => {
+      expect(query).to.respondsTo('formatSkeleton')
+    })
+
+    it('should return skeleton with all fields on it', () => {
+      query
+        .fields('name', 'noAerialPhoto', 'project', 'service')
+
+      // doesn't have a project key should put object in place
+      const skeleton = query.formatSkeleton(missingProject)
+
+      expect(skeleton.project).to.be.an('object')
     })
   })
 
@@ -237,6 +266,50 @@ describe('Query Class', () => {
       const returned = query.explain(logger)
 
       expect(returned).to.equal(query)
+    })
+  })
+
+  describe('#buildSelect()', () => {
+    it('should return a string', () => {
+      query.fields('name', 'noAerialPhoto', 'project')
+      const returned = query.buildSelect()
+
+      expect(returned).to.be.a('string')
+    })
+
+    specify('string should be mapped version of fields', () => {
+      query.fields('name', 'noAerialPhoto', 'project')
+
+      const expected = 'SELECT Id, Name, No_Aerial_Photo__c, Project__r.Id, Project__r.Name'
+      const actual = query.buildSelect()
+
+      expect(actual).to.equal(expected)
+    })
+  })
+
+  describe('#buildQuery()', () => {
+    it('should return a string', () => {
+      query.fields('name')
+
+      const returned = query.buildQuery()
+
+      expect(returned).to.be.a('string')
+    })
+
+    it('should take `_fields` and `_where` state and build query', () => {
+      query
+        .fields('name', 'service', 'project')
+        .where({
+          id: [1, 2, 3, 4],
+          'service.serviceNumber': { not: null },
+          'project.name': { like: '%Something' },
+          noAerialPhoto: { gt: 5, lte: 10 }
+        })
+
+      const expected = "SELECT Id, Name, Service__r.Id, Service__r.Service_Number__c, Service__r.Name, Project__r.Id, Project__r.Name FROM Opportunity WHERE Id IN ('1', '2', '3', '4') AND Service__r.Service_Number__c != null AND Project__r.Name LIKE '%Something' AND No_Aerial_Photo__c > '5' AND No_Aerial_Photo__c <= '10'"
+      const actual = query.buildQuery()
+
+      expect(actual).to.equal(expected)
     })
   })
 })
