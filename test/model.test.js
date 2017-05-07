@@ -1,18 +1,24 @@
 const { expect } = require('chai')
 
 const Arbiter = require('../lib/arbiter')
-const { oppSchema } = require('./fixtures/schema')
+const { oppSchema, lineItemsSchema } = require('./fixtures/schema')
 const Query = require('../lib/model/query')
 
 describe('Model', () => {
   let arbiter
   let Model
+  let Model2
 
   beforeEach(() => {
     arbiter = new Arbiter()
-    Model = arbiter.model('Model', oppSchema)
+    Model = arbiter.model('Opportunity', oppSchema)
+    Model2 = arbiter.model('LineItems', lineItemsSchema)
   })
-  afterEach(() => { Model = null })
+
+  afterEach(() => {
+    Model = null
+    Model2 = null
+  })
 
   it('should have a `_fields` property', () => {
     expect(Model).to.haveOwnProperty('_fields')
@@ -219,6 +225,29 @@ describe('Model', () => {
       const actual = Model.inject(query, params, false)
       const expected = 'SELECT Id, Name FROM Opportunity WHERE Id in ' +
         "('1', '2', '3', '4') AND Name = 'Stephen'"
+      expect(actual).to.equal(expected)
+    })
+  })
+
+  describe('#getModel(name)', () => {
+    it('should fetch model by `name` from arbiter registry', () => {
+      const returned = Model.getModel(Model.name)
+
+      expect(returned).to.equal(Model)
+    })
+
+    it('should return undefined on unregisterd models', () => {
+      const returned = Model.getModel('no freaking way')
+
+      expect(returned).to.equal(undefined)
+    })
+  })
+
+  describe('#getRelField(sfObject)', () => {
+    it('should return field that one model relates to another', () => {
+      const expected = 'oppId'
+      const actual = Model2.getRelField('Opportunity')
+
       expect(actual).to.equal(expected)
     })
   })
