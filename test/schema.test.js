@@ -1,31 +1,8 @@
 const { expect } = require('chai')
-
 const Schema = require('../lib/schema/schema')
+const { oppSchema, lineItemsSchema } = require('./fixtures/schema')
 
-describe('Schema', () => {
-  let schema
-
-  beforeEach(() => {
-    schema = new Schema('Schema', {
-      name: 'Name',
-      something: {
-        writable: true,
-        sf: 'Something__c'
-      },
-      somethingElse: {
-        writable: true,
-        sf: 'Something_Else__c'
-      },
-      child: new Schema('Child', {
-        name: 'Name',
-        another: new Schema('Child2', {
-          deep: 'Something_Deeply_Nested'
-        })
-      })
-    })
-  })
-  afterEach(() => { schema = null })
-
+describe('Schema Class', () => {
   describe('constructor(sfObject, config)', () => {
     it('should throw if `sfObject` is not a string', () => {
       function shouldThrow () {
@@ -46,70 +23,61 @@ describe('Schema', () => {
     })
 
     it('should return object with `sfObject` property', () => {
-      expect(schema).to.haveOwnProperty('sfObject')
+      expect(oppSchema).to.haveOwnProperty('sfObject')
     })
 
     it('should not allow user to overwrite `sfObject` property', () => {
-      schema.sfObject = 'this will not go through'
-      expect(schema.sfObject).to.equal('Schema')
+      oppSchema.sfObject = 'this will not go through'
+      expect(oppSchema.sfObject).to.equal('Opportunity')
     })
   })
 
   describe('#getFieldMapping(field)', () => {
     it('should return mapping if field is in schema', () => {
       const expected = 'Name'
-      const actual = schema.getFieldMapping('name')
+      const actual = oppSchema.getFieldMapping('name')
 
       expect(actual).to.equal(expected)
     })
 
     it('should return undefined if `field` is not in schema', () => {
       const expected = undefined
-      const actual = schema.getFieldMapping('notHere')
+      const actual = oppSchema.getFieldMapping('notHere')
 
       expect(actual).to.equal(expected)
     })
   })
 
   describe('#getAllFields()', () => {
-    it('should traverse schema graph and get all fields', () => {
-      /*
-           opp(....fields) -> project(....fields) -> proposalCAD(...fields)
-           name, id, project.id, project.name, project.proposalCAD.id etc
-      */
-      const oppSchema = new Schema('Opportunity', {
-        name: 'Name',
-        project: new Schema('Project__r', {
-          name: 'Name',
-          proposalCAD: new Schema('Proposal_CAD__r', {
-            name: 'Name'
-          })
-        })
-      })
-
+    it('should traverse schema tree and get all fields', () => {
       const expected = [
         'id',
         'name',
+        'noAerialPhoto',
         'project.id',
         'project.name',
         'project.proposalCAD.id',
-        'project.proposalCAD.name'
+        'project.proposalCAD.proposalCompleted',
+        'service.id',
+        'service.serviceNumber',
+        'service.name'
       ]
-      // loop through results and check against actual
-      // NOTE: They don't HAVE to be in this order technically
       const actual = oppSchema.getAllFields()
-      actual.forEach((field, idx) => {
-        expect(actual[idx]).to.equal(expected[idx])
-      })
+
+      expect(actual).to.eql(expected)
     })
   })
 
   describe('#getLocalFields()', () => {
     it('should only return fields on schema not children fields', () => {
-      const expected = ['id', 'name', 'something', 'somethingElse']
-      const actual = schema.getLocalFields()
-      expect(actual).to.include.members(expected)
-      expect(actual.length).to.equal(expected.length)
+      const expected = [
+        'id',
+        'name',
+        'noAerialPhoto'
+      ]
+      const actual = oppSchema.getLocalFields()
+
+      expect(actual).to.eql(expected)
     })
   })
 
@@ -120,45 +88,46 @@ describe('Schema', () => {
   describe('#getAllWritables()', () => {
     it('should return any field that passes a writable configuration', () => {
       const expected = {
-        something: 'Something__c',
-        somethingElse: 'Something_Else__c'
+        createdById: 'CreatedById',
+        createdOn: 'CreatedDate',
+        productCode: 'ProductCode'
       }
-      const actual = schema.getAllWritables()
+      const actual = lineItemsSchema.getAllWritables()
 
-      expect(actual).to.contain.all.keys(Object.keys(expected))
-      // make sure all the keys have the correct value
-      Object.keys(actual).forEach(key => {
-        expect(actual[key]).to.equal(expected[key])
-      })
+      expect(actual).to.eql(expected)
     })
   })
 
   describe('#mapFields(fields)', () => {
     it('should give back mappings for each item in `fields`', () => {
-      const fields = schema.getAllFields()
+      const fields = oppSchema.getAllFields()
+
       const expected = [
         'Id',
         'Name',
-        'Something__c',
-        'Something_Else__c',
-        'Child.Id',
-        'Child.Name',
-        'Child.Child2.Id',
-        'Child.Child2.Something_Deeply_Nested'
+        'No_Aerial_Photo__c',
+        'Project__r.Id',
+        'Project__r.Name',
+        'Project__r.Proposal_CAD__r.Id',
+        'Project__r.Proposal_CAD__r.Proposal_Completed__c',
+        'Service__r.Id',
+        'Service__r.Service_Number__c',
+        'Service__r.Name'
       ]
-      const actual = schema.mapFields(fields)
-      expect(actual).to.include.members(expected)
-      expect(actual.length).to.equal(expected.length)
+      const actual = oppSchema.mapFields(fields)
+
+      expect(actual).to.eql(expected)
+      // expect(actual.length).to.equal(expected.length)
     })
 
     it('should throw if asking for a field schema doesn\'t have', () => {
       function shouldThrow () {
-        return schema.mapFields(['nopey'])
+        return oppSchema.mapFields(['nopey'])
       }
 
       function shouldThrow2 () {
         // even on nested keys
-        return schema.mapFields(['something', 'child.notgonnawork'])
+        return oppSchema.mapFields(['something', 'child.notgonnawork'])
       }
 
       expect(shouldThrow).to.throw(Error)
@@ -168,25 +137,31 @@ describe('Schema', () => {
 
   describe('#createWritablesProxy()', () => {
     it('should return an object', () => {
-      const returned = schema.createWritablesProxy()
+      const returned = lineItemsSchema.createWritablesProxy()
 
       expect(returned).to.be.an('object')
     })
     it('should add a Proxy handler object to schema', () => {
-      schema.createWritablesProxy()
+      lineItemsSchema.createWritablesProxy()
 
-      expect(schema).to.haveOwnProperty('writablesProxy')
+      expect(lineItemsSchema).to.haveOwnProperty('writablesProxy')
     })
 
     it('should add all writable keys to `schema.writablesProxy`', () => {
-      schema.createWritablesProxy()
+      lineItemsSchema.createWritablesProxy()
 
-      const writables = ['something', 'somethingElse']
-      expect(schema.writablesProxy.writables).to.have.all.keys(writables)
+      const writableKeys = [
+        'createdById',
+        'createdOn',
+        'productCode'
+      ]
+      const { writables } = lineItemsSchema.writablesProxy
+
+      expect(writables).to.have.all.keys(...writableKeys)
     })
 
     it('should have a set function on returned object', () => {
-      const returned = schema.createWritablesProxy()
+      const returned = oppSchema.createWritablesProxy()
 
       expect(returned).to.respondTo('set')
     })

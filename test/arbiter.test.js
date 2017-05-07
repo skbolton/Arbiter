@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const Arbiter = require('../lib/arbiter')
 const Schema = require('../lib/schema/schema')
 
-describe('Class Arbiter', () => {
+describe('Arbiter Class', () => {
   let arbiter
   let Opportunity
   const goodSchema1 = new Schema('Opportunity', {})
