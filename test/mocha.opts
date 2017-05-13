@@ -1,2 +1,2 @@
-utils/**/*.test.js test/**/*.test.js
+lib/**/*.test.js
 --require test/setup/chai

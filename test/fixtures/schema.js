@@ -4,6 +4,7 @@ const oppSchema = new Schema('Opportunity', {
   name: 'Name',
   noAerialPhoto: {
     sf: 'No_Aerial_Photo__c',
+    type: 'boolean',
     writable: true
   },
   project: new Schema('Project__r', {
@@ -34,7 +35,7 @@ const lineItemsSchema = new Schema('OpportunityLineItem', {
   createdOn: {
     sf: 'CreatedDate',
     writable: true,
-    default: Date.now
+    default: () => new Date()
   },
   productCode: {
     sf: 'ProductCode',

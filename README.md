@@ -9,19 +9,6 @@ This is a basic rundown of Arbiter's usage. See below sections for full descript
 ```js
 const arbiter = require('arbiter')
 
-// setup connection
-arbiter.configure({
-  maxConnDuration: 10.000,
-  maxRetries: 2,
-  maxEventListeners: 100,
-  salesforce: {
-    Username:        'salesforceapi@salesforce.com',
-    Password:        'salesforcepassword',
-    Endpoint:        'https://test.salesforce.com',//login.salesforce.com
-    SecurityToken:   'thisisasecuritytoken',
-  }
-})
-
 const OpportunitySchema = new arbiter.Schema('Opportunity', {
   id: 'Id', // this is actually done for you automatically even in nested schemas
   // simple key => value for mappings
@@ -30,14 +17,16 @@ const OpportunitySchema = new arbiter.Schema('Opportunity', {
   callRequested: {
     sf: 'Call_Requested_By__c',
     // we want to be able to write to this field
-    writable: true
-  }
+    writable: true,
+    type: 'string'
+  },
   custom: 'Custom__c',
   // can handle nested Schemas
   project: new arbiter.Schema('Project__r', {
     name: 'Name',
     createdDate: 'Created_Date__c'
-  })
+  },
+  { root: false })
 })
 
 const Opportunity = arbiter.model('Opportunity', OpportunitySchema)
@@ -94,67 +83,7 @@ The nested schema power of Arbiter needs to be used with care. It is possible th
 ```js
 const Model = arbiter.model('Model name', schemaObj)
 ```
-Creating a Model is easy all you need is a unique name (Arbiter makes sure you don't overwrite exising models) and a schema to bake into it. The Model and Schema work together to provide most of the functionality of Arbiter. Arbiter's API is chainable, aside from `exec()`, Model functions can be called in any order.
-
-### `Model.fields(...fields)`
-* `field` (String) - The field to select
-  * `id` of toplevel schema is always included
-  * If you pass the name of a nested schema all local fields on that schema will be selected (no relationships from it)
-  *  `'.'` will select local fields on the top level schema (no relationships)
-  * `'*'` will traverse the entire schema tree and give you all fields in the schema.
-
-```js
-const simpleSchema = new arbiter.Schema('Simple', {
-  name: 'Name',
-  other: 'Other'
-  nested: new arbiter.Schema('Nested', {
-    something: 'Something__c',
-    anotherNested: new arbiter.Schema('Another_Nested__r', {
-      anotherSomething: 'Another_Something__c'
-    })
-  })
-})
-
-const SimpleModel = new arbiter.model('Simple', simpleSchema)
-
-SimpleModel
-  // selects id name, all of nested, and the anotherSomething field
-  .fields('name', 'nested', 'nested.anotherNested.anotherSomething')
-
-SimpleModel
-// selects id, name, and other
-  .fields('.')
-
-SimpleModel
-  // id, name, other, all of nested, all of anotherNested
-  .fields('*')
-
-```
-In most cases Arbiters API is repeatable. `fields(...fields)` is not. Successive calls to `fields(...fields)` will overwrite previous calls.
-
-### `Model.where(opts)`
-* `opts` (Object) - The where clauses to filter query by
-
-**Available where clause options**
-```js
-Model
-  .where({
-    field: 'equal this',
-    field: { not: 'not equal this' },
-    field: { like: '%regex searching' }
-    field: { notlike: '%should not match this%' }
-    field: [ 'in', 'one', 'of', 'these' ],
-    field: { not: [ 'not', 'in', 'one', 'of', 'these' ] },
-    // comparison operators
-    field: { gt: 'something', lt: 'something', gte: 'something', lte: 'something' },
-    // filter off nested values is allowed
-    // pass multiple clauses for a field
-    field: { not: null, gte: 5, like: '%something' },
-    'field.nested.name': 'all of the above work here'
-    // for things that arbiter's api doesn't cover you can pass field RAW with a raw string to add to where clauses
-    RAW: 'RAW QUERY STRING'
-  })
-```
+Creating a Model is easy all you need is a unique name (Arbiter makes sure you don't overwrite exising models) and a schema to bake into it. The Model and Schema work together to provide most of the functionality of Arbiter. To kick off a query start with one of the `find` functions listed below. After that Arbiter's API is chainable, aside from `exec()`, Model functions can be called in any order.
 
 ### `Model.find(opts)`
 * `opts` (Object) _[optional]_ - If provided `opts` work the same as passing an object to `Model.where(opts)`. If nothing is passed then function becomes a noop and simply passes Model for chaining
@@ -195,11 +124,75 @@ Model
   })
 ```
 
+
+### `Model.fields(...fields)`
+The fields api allows you to select which fields you want returned back from a query.
+* `field` (String) - The field to select
+  * `id` of toplevel schema is always included
+  * If you pass the name of a nested schema all local fields on that schema will be selected (no relationships from it)
+  *  `'.'` will select local fields on the top level schema (no relationships)
+  * `'*'` will traverse the entire schema tree and give you all fields in the schema.
+
+```js
+const simpleSchema = new arbiter.Schema('Simple', {
+  name: 'Name',
+  other: 'Other'
+  nested: new arbiter.Schema('Nested', {
+    something: 'Something__c',
+    anotherNested: new arbiter.Schema('Another_Nested__r', {
+      anotherSomething: 'Another_Something__c'
+    })
+  })
+})
+
+const SimpleModel = new arbiter.model('Simple', simpleSchema)
+
+SimpleModel
+  // selects id name, all of nested, and the anotherSomething field
+  .fields('name', 'nested', 'nested.anotherNested.anotherSomething')
+
+SimpleModel
+// selects id, name, and other
+  .fields('.')
+
+SimpleModel
+  // id, name, other, all of nested, all of anotherNested
+  .fields('*')
+
+```
+In most cases Arbiters API is repeatable. `fields(...fields)` is not. Successive calls to `fields(...fields)` will overwrite previous calls.
+
+
+### `Model.where(opts)`
+* `opts` (Object) - The where clauses to filter query by
+
+**Available where clause options**
+```js
+Model
+  .where({
+    field: 'equal this',
+    field: { not: 'not equal this' },
+    field: { like: '%regex searching' }
+    field: { notlike: '%should not match this%' }
+    field: [ 'in', 'one', 'of', 'these' ],
+    field: { not: [ 'not', 'in', 'one', 'of', 'these' ] },
+    // comparison operators
+    field: { gt: 'something', lt: 'something', gte: 'something', lte: 'something' },
+    // filter off nested values is allowed
+    // pass multiple clauses for a field
+    field: { not: null, gte: 5, like: '%something' },
+    'field.nested.name': 'all of the above work here'
+    // for things that arbiter's api doesn't cover you can pass field RAW with a raw string to add to where clauses
+    RAW: 'RAW QUERY STRING'
+  })
+```
+
 ### `Model.explain()`
 With Arbiter being a work in progress I wanted to keep it as open as possible so that developers can see what is going on behind the scenes in case bugs occur. `Model.explain()` can be added to any part of the chain to reveal state of Model including fields selected, where clauses, and the query that has been built up at the point that `explain()` is called. For now this function will simply log to the console. Later implementations will allow passing a custom logger. `explain()` is chainable so it can be placed at any point in a Model's chain and not stop a query from executing.
 
 ```js
 Model
+  .find()
   .fields('id', 'name')
   .where({
     id: 1,
@@ -219,6 +212,29 @@ Model
 
 ```
 
+### `Model.exec()`
+Builds up and executes a query based off of state of Model. If at the the point of `exec()` no fields have been selected then all fields in the schema will be selected for you. This function returns a promise that will resolve to grunt instances. It is important to note that if your query specifies a specific id then you will get back one grunt. No id, or a collection of ids will always return an array of grunts
+
+```js
+Model
+  .findById(1)
+  .fields('id')
+  .exec()
+  .then(grunt => {
+    // result will be one thing since an id was selected
+  })
+
+Model
+  .find()
+  .fields('id')
+  .exec()
+  .then(grunts => {
+    // result will be an array
+  })
+```
+
+If the promise resolves on `exec()` then you will get back what arbiter calls grunts. These objects are very similar to documents in Mongoosejs. Check their api for a full description.
+
 ### `Model.RAW(query)`
 * `query` (String) - query to execute
 
@@ -233,24 +249,10 @@ Model
   })
 ```
 
-### `Model.query(query)`
-* `query` (String) - query to execute
-
-Very similar to `Model.RAW(query)` except this will run the response through all of Arbiter's mapping and return a Document instance. This is useful if you already have a query string and don't need any of Arbiter's `.fields()` or `.where()` API.
-
-```js
-Model
-  .query('Select First_Name__c FROM Lead')
-  .then(lead => {
-    // { firstName: 'Jane Doe' }
-  })
-```
-
-### `Model.inject(query, params, quotes, replaceChar)`
+### `Model.inject(query, params, quotes)`
 * `query` (String) - query to inject values into
 * `params` (Object) [default {}] - object with keys to replace with keys value
 * `quotes` (Boolean) [default true] - whether to surround injected value with quotes
-* `replaceChar` (String) [default @] - what value to look for when searching keys on `params`
 
 If you prefer to work with SOQL query strings directly then this function will help you write flexible query templates. **NOTE: When the value of a key in `params` is an array then the array is automatically stringified and surrouned in '()'**
 
@@ -260,12 +262,65 @@ Model
   .query(Model.inject(query, { status: 'Open' }))
   // Select Id from Lead where Status like \'Open\'
 
-const customReplacer = 'Select Id from Lead Where Status In $status'
+const customReplacer = 'Select Id from Lead Where Status In @status'
 Model
   .query(
-    Model.inject(customReplacer), {status: ['Open', 'Closed'], true, '$' }
+    Model.inject(customReplacer), { status: ['Open', 'Closed'], true }
     // Select Id from Lead Where Status in (\'Open\', \'Closed\')
   )
 ```
+
+## Connection
+It is possible to build and set up your Models and Schemas at any point. But in order to start querying and get results back a connection to salesforce must be established. Arbiter uses the [dread-steed](https://www.npmjs.com/package/dread-steed) package as its pool manager.
+
+```js
+// configuration for connections
+const config = {
+  maxConnDuration: 10.000,
+  maxRetries: 2,
+  silent: true, // silence dreadsteed log messages Defaults to false
+  errorTypes: ['INVALID_SESSION_ID','INVALID_LOGIN','DUPLICATE_VALUE','SERVER_UNAVAILABLE','REQUEST_LIMIT_EXCEEDED'],
+  maxEventListeners: 100,
+  salesforce: {
+      Username: 'salesforceapi@salesforce.com',
+      Password: 'salesforcepassword',
+      Endpoint: 'https://test.salesforce.com',
+      SecurityToken: 'thisisasecuritytoken',
+  }
+  /*
+  you can also pass an array of api users to swap between them when limits are hit
+  salesforce: [
+    {
+        Username: 'salesforceapi@salesforce.com',
+        Password: 'salesforcepassword',
+        Endpoint: 'https://test.salesforce.com',/
+        SecurityToken: 'thisisasecuritytoken',
+    },
+    {
+        Username: 'salesforceapi2@salesforce.com',
+        Password: 'salesforcepassword',
+        Endpoint: 'https://test.salesforce.com',
+        SecurityToken: 'thisisasecuritytoken',
+    }
+  ]
+  */
+}
+
+const errorCallback = function(err){
+    //err - object
+}
+
+const connectionCallback = function(conn){
+    //conn - jsforce connection object
+}
+
+const callbacks = {
+    onError: errorCallback,
+    onConnection: connectionCallback
+}
+arbiter.configure(config, callbacks)
+```
+
+`arbiter.configure()` is a direct passthrough to dread-steed so anything listed in their documentation is fair game. After configuring arbiter, any model or arbiter can call `getConnection()` to get direct access to a dread-steed connection.
 
 # TODO: fill in rest of API

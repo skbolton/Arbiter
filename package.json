@@ -1,7 +1,7 @@
 {
-  "name": "arbiter",
-  "version": "1.0.0",
-  "description": "",
+  "name": "arbiter-salesforce",
+  "version": "0.0.1",
+  "description": "A Salesforce ORM",
   "main": "index.js",
   "scripts": {
     "test": "standard && mocha",
@@ -10,7 +10,7 @@
     "fix": "standard --fix"
   },
   "keywords": [],
-  "author": "",
+  "author": "Stephen Bolton",
   "license": "ISC",
   "standard": {
     "env": "mocha"
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "dot-prop": "^4.1.1",
+    "dread-steed": "^0.1.0",
     "type-detect": "^4.0.0"
   }
 }
