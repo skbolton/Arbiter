@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "description": "A Salesforce ORM",
   "main": "index.js",
+  "tonicExample": "const arbiter = require('arbiter-salesforce')",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/skbolton/Arbiter"
+  },
   "scripts": {
     "test": "standard && mocha",
     "posttest": "rimraf .nyc_output",
