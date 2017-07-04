@@ -1,6 +1,6 @@
 {
   "name": "arbiter-salesforce",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "A Salesforce ORM",
   "main": "index.js",
   "tonicExample": "const arbiter = require('arbiter-salesforce')",
