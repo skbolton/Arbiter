@@ -187,6 +187,40 @@ Model
   })
 ```
 
+### `Model.limit(num)`
+* `num` (Number) - A Number to limit query results
+
+```js
+Model
+  .limit(5)
+```
+
+### `Model.offset(num)`
+* `num` (Number) - A Number to offset query results
+
+```js
+Model
+  .offset(5)
+```
+
+### `Model.orderBy(field, dir)`
+* `field` (String) - A field to order query results by
+* `dir` (String) _[optional]_ - A direction to order query results by.
+  * `default: 'asc' //ascending`
+  * or specify `'desc' //descending`
+  * If an incorrect value is passed in, the order will default.
+
+```js
+Model
+  .orderBy('project.id') //defaults to 'asc'
+
+Model
+  .orderBy('project.id', 'desc') //displays in descending order
+
+Model
+  .orderBy('project.id', '1D') //defaults to 'asc'
+```
+
 ### `Model.explain()`
 With Arbiter being a work in progress I wanted to keep it as open as possible so that developers can see what is going on behind the scenes in case bugs occur. `Model.explain()` can be added to any part of the chain to reveal state of Model including fields selected, where clauses, and the query that has been built up at the point that `explain()` is called. For now this function will simply log to the console. Later implementations will allow passing a custom logger. `explain()` is chainable so it can be placed at any point in a Model's chain and not stop a query from executing.
 
