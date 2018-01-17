@@ -1,6 +1,6 @@
 {
   "name": "arbiter-salesforce",
-  "version": "0.0.17",
+  "version": "0.1.0",
   "description": "A Salesforce ORM",
   "main": "index.js",
   "tonicExample": "const arbiter = require('arbiter-salesforce')",
@@ -31,7 +31,8 @@
   },
   "dependencies": {
     "dot-prop": "^4.1.1",
-    "dread-steed": "^0.1.0",
+    "jsforce": "^1.8.0",
+    "merge": "^1.2.0",
     "type-detect": "^4.0.0"
   }
 }

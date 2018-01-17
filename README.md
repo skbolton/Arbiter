@@ -271,56 +271,24 @@ Model
 ```
 
 ## Connection
-It is possible to build and set up your Models and Schemas at any point. But in order to start querying and get results back a connection to salesforce must be established. Arbiter uses the [dread-steed](https://www.npmjs.com/package/dread-steed) package as its pool manager.
+It is possible to build and set up your Models and Schemas at any point. But in order to start querying and get results back a connection to salesforce must be established. 
 
 ```js
-// configuration for connections
 const config = {
-  maxConnDuration: 10.000,
-  maxRetries: 2,
-  silent: true, // silence dreadsteed log messages Defaults to false
-  errorTypes: ['INVALID_SESSION_ID','INVALID_LOGIN','DUPLICATE_VALUE','SERVER_UNAVAILABLE','REQUEST_LIMIT_EXCEEDED'],
-  maxEventListeners: 100,
-  salesforce: {
-      Username: 'salesforceapi@salesforce.com',
-      Password: 'salesforcepassword',
-      Endpoint: 'https://test.salesforce.com',
-      SecurityToken: 'thisisasecuritytoken',
+  // maxConnectionTime before reconnecting, default shown which is 6 hours
+  maxConnectionTime: 21600000,
+  username: 'some.user',
+  password: 'somepassword',
+  // this gets directly passed to jsforce.Connection() any of its options are valid
+  connection: {
+    loginUrl: 'login.salesforce.com',
+    // this is not required only if your situation requires one
+    accessToken: 'some token'
   }
-  /*
-  you can also pass an array of api users to swap between them when limits are hit
-  salesforce: [
-    {
-        Username: 'salesforceapi@salesforce.com',
-        Password: 'salesforcepassword',
-        Endpoint: 'https://test.salesforce.com',/
-        SecurityToken: 'thisisasecuritytoken',
-    },
-    {
-        Username: 'salesforceapi2@salesforce.com',
-        Password: 'salesforcepassword',
-        Endpoint: 'https://test.salesforce.com',
-        SecurityToken: 'thisisasecuritytoken',
-    }
-  ]
-  */
 }
-
-const errorCallback = function(err){
-    //err - object
-}
-
-const connectionCallback = function(conn){
-    //conn - jsforce connection object
-}
-
-const callbacks = {
-    onError: errorCallback,
-    onConnection: connectionCallback
-}
-arbiter.configure(config, callbacks)
+arbiter.configure(config)
 ```
 
-`arbiter.configure()` is a direct passthrough to dread-steed so anything listed in their documentation is fair game. After configuring arbiter, any model or arbiter can call `getConnection()` to get direct access to a dread-steed connection.
+`arbiter.configure(config)` is mostly a passthrough to jsforce to create and maintain a connection.
 
 # TODO: fill in rest of API
