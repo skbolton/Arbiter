@@ -1,2 +1,0 @@
-lib/**/*.test.js
---require test/setup/chai
