@@ -35,7 +35,7 @@
   "dependencies": {
     "dot-prop": "^4.1.1",
     "jsforce": "^1.8.0",
-    "merge": "^1.2.0",
+    "superstruct": "^0.5.1",
     "type-detect": "^4.0.0"
   }
 }
