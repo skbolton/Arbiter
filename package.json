@@ -1,7 +1,7 @@
 {
   "name": "arbiter-salesforce",
   "version": "0.1.1",
-  "description": "A Salesforce ORM",
+  "description": "A Salesforce ORM powered by jsforce",
   "main": "index.js",
   "tonicExample": "const arbiter = require('arbiter-salesforce')",
   "repository": {
@@ -9,22 +9,25 @@
     "url": "git://github.com/skbolton/Arbiter"
   },
   "scripts": {
-    "test": "standard && mocha",
+    "test": "standard && jest",
     "posttest": "rimraf .nyc_output",
-    "coverage": "nyc mocha",
     "fix": "standard --fix"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./test/setup.js"
   },
   "keywords": [],
   "author": "Stephen Bolton",
   "license": "ISC",
   "standard": {
-    "env": "mocha"
+    "env": "mocha",
+    "globals": [
+      "td",
+      "expect"
+    ]
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
-    "mocha": "^3.2.0",
-    "nyc": "^10.2.0",
+    "jest": "^22.4.2",
     "rimraf": "^2.6.1",
     "standard": "^10.0.2",
     "testdouble": "^2.1.2"
