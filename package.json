@@ -10,27 +10,26 @@
   },
   "scripts": {
     "test": "standard && jest",
-    "posttest": "rimraf .nyc_output",
     "fix": "standard --fix"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./test/setup.js"
+    "testRegex": "/__test__/.*.js",
+    "clearMocks": true
   },
   "keywords": [],
   "author": "Stephen Bolton",
   "license": "ISC",
   "standard": {
-    "env": "mocha",
+    "env": "jest",
     "globals": [
       "td",
-      "expect"
+      "specify"
     ]
   },
   "devDependencies": {
     "jest": "^22.4.2",
     "rimraf": "^2.6.1",
-    "standard": "^10.0.2",
-    "testdouble": "^2.1.2"
+    "standard": "^10.0.2"
   },
   "dependencies": {
     "dot-prop": "^4.1.1",
