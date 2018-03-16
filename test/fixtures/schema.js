@@ -16,10 +16,7 @@ const oppSchema = new Schema('Opportunity', {
   service: new Schema('Service__r', {
     serviceNumber: 'Service_Number__c',
     name: 'Name'
-  }),
-  lineItems: {
-    assoc: 'LineItems'
-  }
+  })
 })
 
 const lineItemsSchema = new Schema('OpportunityLineItem', {
