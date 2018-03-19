@@ -1,0 +1,118 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'publish',
+1 verbose cli   '--tag',
+1 verbose cli   'beta' ]
+2 info using npm@3.10.10
+3 info using node@v6.9.5
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/stephen/Development/Arbiter',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/stephen/.npm/arbiter-salesforce/0.1.1/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/stephen/.npm correctMkdir not in flight; initializing
+10 info lifecycle arbiter-salesforce@0.1.1~prepublish: arbiter-salesforce@0.1.1
+11 silly lifecycle arbiter-salesforce@0.1.1~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/stephen/.npm/arbiter-salesforce/0.1.1/package.tgz',
+12 verbose tar pack   '/Users/stephen/Development/Arbiter' ]
+13 verbose tarball /Users/stephen/.npm/arbiter-salesforce/0.1.1/package.tgz
+14 verbose folder /Users/stephen/Development/Arbiter
+15 verbose addLocalTarball adding from inside cache /Users/stephen/.npm/arbiter-salesforce/0.1.1/package.tgz
+16 verbose correctMkdir /Users/stephen/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd arbiter-salesforce@0.1.1
+18 verbose afterAdd /Users/stephen/.npm/arbiter-salesforce/0.1.1/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/stephen/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/stephen/.npm/arbiter-salesforce/0.1.1/package/package.json written
+21 silly publish { name: 'arbiter-salesforce',
+21 silly publish   version: '0.1.1',
+21 silly publish   description: 'A Salesforce ORM powered by jsforce',
+21 silly publish   main: 'index.js',
+21 silly publish   tonicExample: 'const arbiter = require(\'arbiter-salesforce\')',
+21 silly publish   repository: { type: 'git', url: 'git://github.com/skbolton/Arbiter.git' },
+21 silly publish   scripts: { test: 'standard && jest', fix: 'standard --fix' },
+21 silly publish   jest: { testRegex: '/__test__/.*.js', clearMocks: true },
+21 silly publish   keywords: [],
+21 silly publish   author: { name: 'Stephen Bolton' },
+21 silly publish   license: 'ISC',
+21 silly publish   standard: { env: 'jest', globals: [ 'td', 'specify' ] },
+21 silly publish   devDependencies: { jest: '^22.4.2', rimraf: '^2.6.1', standard: '^10.0.2' },
+21 silly publish   dependencies:
+21 silly publish    { 'dot-prop': '^4.1.1',
+21 silly publish      jsforce: '^1.8.0',
+21 silly publish      superstruct: '^0.5.1',
+21 silly publish      'type-detect': '^4.0.0' },
+21 silly publish   readme: '# Arbiter\n## NOTE: THIS IS IN BETA AND SHOULD NOT BE USED IN PRODUCTION YET\nAs good of a tool as Salesforce can be, it definitely has some downsides. Managing and building SOQL queries can be cumbersome. Also working directly with Salesforce fields is horrible, `Custom__r.Another_Custom__r.Id` anyone?\n\nArbiter\'s mission is to ease the pain or using Salesforce as a software developer. It is not trying to be a tool to edit and set up your Salesforce objects and relations (you are still going to need developers to do that). While Arbiter is not a true ORM it does provide many of the awesome features that you lean on an ORM for. Including a awesome query building syntax, customized schema mappings, and ease of reading and writing to your Salesforce. Heavily inspired by [Mongoosejs](https://github.com/Automattic/mongoose), Arbiter tries to keep its API as close to Mongoose as possible while matching the needs of working with Salesforce.\n\n## Usage\nThis is a basic rundown of Arbiter\'s usage. See below sections for full description of each part of the API.\n```js\nconst arbiter = require(\'arbiter\')\n\nconst OpportunitySchema = new arbiter.Schema(\'Opportunity\', {\n  id: \'Id\', // this is actually done for you automatically even in nested schemas\n  // simple key => value for mappings\n  name: \'Name\',\n  // object syntax for customized definitions\n  callRequested: {\n    sf: \'Call_Requested_By__c\',\n    // we want to be able to write to this field\n    writable: true,\n    type: \'string\'\n  },\n  custom: \'Custom__c\',\n  // can handle nested Schemas\n  project: new arbiter.Schema(\'Project__r\', {\n    name: \'Name\',\n    createdDate: \'Created_Date__c\'\n  },\n  { root: false })\n})\n\nconst Opportunity = arbiter.model(\'Opportunity\', OpportunitySchema)\n\nOpportunity\n  .findById(1)\n  .fields(\'name\', \'callRequested\', \'project\') // yeah grab all of project (id, name, createdDate)!\n  .where({\n    callRequested: \'John Smith\',\n    custom: { not: null },\n    name: [\'in\', \'one\', \'of\', \'these\'],\n    \'project.name\': { like: \'%regex%\' }\n  })\n  .exec()\n  .then(opp => {\n    // edit fields in place and call save to send back up to salesforce\n    opp.callRequested = \'Jane Doe\'\n    return opp.save()\n  })\n  .then(opp => /* opp was saved */)\n```\n___\n\n## API\n\n## **Schemas**\n```js\nconst schemaObj = new arbiter.Schema(\'Salesforce Object\', opts)\n```\nIt all starts with a Schema definintion. Schemas describe the mappings from a Salesforce value to how you want to reference it. They also can be nested. The first argument when creating a schema is is the mapping to a salesforce object. At the root schema level this would be the object you would save to. At nested levels it is the mapping of how the root references it. **It\'s important to note that this nesting represents Salesforce Object relationships that have to be in place in order for Arbiter to query them. Arbiter cannot \'create\' the connection between two Salesforce objects.**\n\nImagine that in our Salesforce situation we have a `Lead` object which has a reference to a `Contact` which in turn has a reference to a `Contract`. We could set up a schema like so.\n```js\nconst LeadSchema = new arbiter.Schema(\'Lead\', {\n  // id: \'Id\' is always written in at every level for you\n  firstContactDate: \'First_Contact_Date__c\',\n  // we want to name our Contact relationship contact\n  contact: new arbiter.Schema(\'Contact\', {\n    firstName: \'First_Name__c\',\n    lastName: \'Last_Name__c\',\n    // and out Contact\'s Contract relationship as contract\n    contract: new arbiter.Schema(\'Contract__r\', {\n      signedDate: \'Contract_Signed_Date__c\'\n    })\n  })\n})\n// lead -> contact -> contract\n```\nWe could now successfully query data off of the contract through our Lead Schema!\n#### With Great Power\nThe nested schema power of Arbiter needs to be used with care. It is possible that in your instance you might have a trail of 5 connected objects and you would maybe link them all together. Or maybe you write a schema in one model that covers your entire salesforce setup. This will only lead to a bloated and slow Model. In our above example we are writing a Lead Schema if need be we could still write a contact and contract schema along with Models if those objects see a lot of activity. The idea in Arbiter is that a schema might extend slightly out of its bounds and into its relations only for querying power.\n\n## **Models**\n```js\nconst Model = arbiter.model(\'Model name\', schemaObj)\n```\nCreating a Model is easy all you need is a unique name (Arbiter makes sure you don\'t overwrite exising models) and a schema to bake into it. The Model and Schema work together to provide most of the functionality of Arbiter. To kick off a query start with one of the `find` functions listed below. After that Arbiter\'s API is chainable, aside from `exec()`, Model functions can be called in any order.\n\n### `Model.find(opts)`\n* `opts` (Object) _[optional]_ - If provided `opts` work the same as passing an object to `Model.where(opts)`. If nothing is passed then function becomes a noop and simply passes Model for chaining\n\n```js\nModel\n  .find({\n    id: 1,\n    status: { like: \'%open\' }\n  })\n```\n\n### `Model.findById(id)`\n* `id` (any) - id to include in query\n\n```js\nModel\n  .findById(1)\n\n// same as doing\nModel\n  .where({\n    id: 1\n  })\n```\n\n### `Model.findByIds(ids)`\n* `ids` (Array) - ids to include in query\n\n```js\nModel\n  .findByIds([ 1, 2, 3, 4 ])\n\n// same as\nModel\n  .where({\n    id: [ 1, 2, 3, 4 ]\n  })\n```\n\n\n### `Model.fields(...fields)`\nThe fields api allows you to select which fields you want returned back from a query.\n* `field` (String) - The field to select\n  * `id` of toplevel schema is always included\n  * If you pass the name of a nested schema all local fields on that schema will be selected (no relationships from it)\n  *  `\'.\'` will select local fields on the top level schema (no relationships)\n  * `\'*\'` will traverse the entire schema tree and give you all fields in the schema.\n\n```js\nconst simpleSchema = new arbiter.Schema(\'Simple\', {\n  name: \'Name\',\n  other: \'Other\'\n  nested: new arbiter.Schema(\'Nested\', {\n    something: \'Something__c\',\n    anotherNested: new arbiter.Schema(\'Another_Nested__r\', {\n      anotherSomething: \'Another_Something__c\'\n    })\n  })\n})\n\nconst SimpleModel = new arbiter.model(\'Simple\', simpleSchema)\n\nSimpleModel\n  // selects id name, all of nested, and the anotherSomething field\n  .fields(\'name\', \'nested\', \'nested.anotherNested.anotherSomething\')\n\nSimpleModel\n// selects id, name, and other\n  .fields(\'.\')\n\nSimpleModel\n  // id, name, other, all of nested, all of anotherNested\n  .fields(\'*\')\n\n```\nIn most cases Arbiters API is repeatable. `fields(...fields)` is not. Successive calls to `fields(...fields)` will overwrite previous calls.\n\n\n### `Model.where(opts)`\n* `opts` (Object) - The where clauses to filter query by\n\n**Available where clause options**\n```js\nModel\n  .where({\n    field: \'equal this\',\n    field: { not: \'not equal this\' },\n    field: { like: \'%regex searching\' }\n    field: { notlike: \'%should not match this%\' }\n    field: [ \'in\', \'one\', \'of\', \'these\' ],\n    field: { not: [ \'not\', \'in\', \'one\', \'of\', \'these\' ] },\n    // comparison operators\n    field: { gt: \'something\', lt: \'something\', gte: \'something\', lte: \'something\' },\n    // filter off nested values is allowed\n    // pass multiple clauses for a field\n    field: { not: null, gte: 5, like: \'%something\' },\n    \'field.nested.name\': \'all of the above work here\'\n    // for things that arbiter\'s api doesn\'t cover you can pass field RAW with a raw string to add to where clauses\n    RAW: \'RAW QUERY STRING\'\n  })\n```\n\n### `Model.explain()`\nWith Arbiter being a work in progress I wanted to keep it as open as possible so that developers can see what is going on behind the scenes in case bugs occur. `Model.explain()` can be added to any part of the chain to reveal state of Model including fields selected, where clauses, and the query that has been built up at the point that `explain()` is called. For now this function will simply log to the console. Later implementations will allow passing a custom logger. `explain()` is chainable so it can be placed at any point in a Model\'s chain and not stop a query from executing.\n\n```js\nModel\n  .find()\n  .fields(\'id\', \'name\')\n  .where({\n    id: 1,\n    status: { not: null }\n  })\n  .explain()\n  .exec()\n  //...\n\n  // logs\n  // {\n  //   SFObject: \'Whatever Object Model is linked to\',\n  //   fields: [\'id\', \'name\'],\n  //   where: { id: 1, status: { not: null } },\n  //   query: \'SELECT Id, Name FROM ModelSFObject WHERE Id = \\\'1\\\' AND Status != null\'\n  // }\n\n```\n\n### `Model.exec()`\nBuilds up and executes a query based off of state of Model. If at the the point of `exec()` no fields have been selected then all fields in the schema will be selected for you. This function returns a promise that will resolve to grunt instances. It is important to note that if your query specifies a specific id then you will get back one grunt. No id, or a collection of ids will always return an array of grunts\n\n```js\nModel\n  .findById(1)\n  .fields(\'id\')\n  .exec()\n  .then(grunt => {\n    // result will be one thing since an id was selected\n  })\n\nModel\n  .find()\n  .fields(\'id\')\n  .exec()\n  .then(grunts => {\n    // result will be an array\n  })\n```\n\nIf the promise resolves on `exec()` then you will get back what arbiter calls grunts. These objects are very similar to documents in Mongoosejs. Check their api for a full description.\n\n### `Model.RAW(query)`\n* `query` (String) - query to execute\n\nThis is an option to have Arbiter query Salesforce and forget about all the mapping and features that Arbiter provides. Querying this way simply gives back untouched raw results\n\n```js\nModel\n  .RAW(\'Select First_Name__c FROM Lead\')\n  .then(data => data.records)\n  .then(response => {\n    // [{ First_Name__c: \'Jane Doe\' }]\n  })\n```\n\n### `Model.inject(query, params, quotes)`\n* `query` (String) - query to inject values into\n* `params` (Object) [default {}] - object with keys to replace with keys value\n* `quotes` (Boolean) [default true] - whether to surround injected value with quotes\n\nIf you prefer to work with SOQL query strings directly then this function will help you write flexible query templates. **NOTE: When the value of a key in `params` is an array then the array is automatically stringified and surrouned in \'()\'**\n\n```js\nconst query = \'Select Id from Lead Where Status Like @status\'\nModel\n  .query(Model.inject(query, { status: \'Open\' }))\n  // Select Id from Lead where Status like \\\'Open\\\'\n\nconst customReplacer = \'Select Id from Lead Where Status In @status\'\nModel\n  .query(\n    Model.inject(customReplacer), { status: [\'Open\', \'Closed\'], true }\n    // Select Id from Lead Where Status in (\\\'Open\\\', \\\'Closed\\\')\n  )\n```\n\n## Connection\nIt is possible to build and set up your Models and Schemas at any point. But in order to start querying and get results back a connection to salesforce must be established. \n\n```js\nconst config = {\n  // maxConnectionTime before reconnecting, default shown which is 6 hours\n  maxConnectionTime: 21600000,\n  username: \'some.user\',\n  password: \'somepassword\',\n  // this gets directly passed to jsforce.Connection() any of its options are valid\n  connection: {\n    loginUrl: \'login.salesforce.com\',\n    // this is not required only if your situation requires one\n    accessToken: \'some token\'\n  }\n}\narbiter.configure(config)\n```\n\n`arbiter.configure(config)` is mostly a passthrough to jsforce to create and maintain a connection.\n\n# TODO: fill in rest of API\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '26a97156ba7a4d38c65318c7e0b6cadc371ea204',
+21 silly publish   bugs: { url: 'https://github.com/skbolton/Arbiter/issues' },
+21 silly publish   homepage: 'https://github.com/skbolton/Arbiter#readme',
+21 silly publish   _id: 'arbiter-salesforce@0.1.1',
+21 silly publish   _shasum: 'aa2e952a6bd1bb48bd2cdb74a1e7a42b12129f1f',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name arbiter-salesforce
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'arbiter-salesforce',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'arbiter-salesforce',
+26 silly mapToRegistry   name: 'arbiter-salesforce',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/arbiter-salesforce
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/stephen/.npm/arbiter-salesforce/0.1.1/package.tgz
+30 verbose request uri https://registry.npmjs.org/arbiter-salesforce
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 11:27:06 AM
+33 verbose request using bearer token for auth
+34 verbose request id 06e3b7671be2dfaa
+35 http request PUT https://registry.npmjs.org/arbiter-salesforce
+36 http 403 https://registry.npmjs.org/arbiter-salesforce
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '93',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Mon, 19 Mar 2018 17:27:07 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-den6025-DEN',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1521480426.424140,VS0,VE1301',
+37 verbose headers   vary: 'Accept-Encoding, Accept' }
+38 verbose request invalidating /Users/stephen/.npm/registry.npmjs.org/arbiter-salesforce on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: You cannot publish over the previously published versions: 0.1.1. : arbiter-salesforce
+40 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+40 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+40 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:187:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1048:10)
+40 verbose stack     at emitOne (events.js:96:13)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:969:12)
+41 verbose statusCode 403
+42 verbose pkgid arbiter-salesforce
+43 verbose cwd /Users/stephen/Development/Arbiter
+44 error Darwin 17.4.0
+45 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish" "--tag" "beta"
+46 error node v6.9.5
+47 error npm  v3.10.10
+48 error code E403
+49 error You cannot publish over the previously published versions: 0.1.1. : arbiter-salesforce
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
