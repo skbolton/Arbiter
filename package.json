@@ -4,6 +4,9 @@
   "description": "A Salesforce ORM powered by jsforce",
   "main": "index.js",
   "tonicExample": "const arbiter = require('arbiter-salesforce')",
+  "engines": {
+    "node": ">= 6.0"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/skbolton/Arbiter"
