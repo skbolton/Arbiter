@@ -1,5 +1,0 @@
-{
-  "testPathIgnorePatterns": ["/node_modules/"],
-  "testRegex": "/.*(test|spec)\\.jsx?$",
-  "clearMocks": true
-}

@@ -1,0 +1,795 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Arbiter-Salesforce</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#getting-started" class="toc-h1 toc-link" data-title="getting-started">Getting Started</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#installation" class="toc-h2 toc-link" data-title="installation">Installation</a>
+                  </li>
+                  <li>
+                    <a href="#define" class="toc-h2 toc-link" data-title="define">Define</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#schemas" class="toc-h1 toc-link" data-title="schemas">Schemas</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#nested-schemas" class="toc-h2 toc-link" data-title="nested-schemas">Nested Schemas</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#models" class="toc-h1 toc-link" data-title="models">Models</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#associations" class="toc-h2 toc-link" data-title="associations">Associations</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#raw-jsforce-queries" class="toc-h1 toc-link" data-title="raw-jsforce-queries">Raw JSForce Queries</a>
+          </li>
+          <li>
+            <a href="#kittens" class="toc-h1 toc-link" data-title="kittens">Kittens</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="get-all-kittens">Get All Kittens</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="get-a-specific-kitten">Get a Specific Kitten</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="delete-a-specific-kitten">Delete a Specific Kitten</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="errors">Errors</a>
+          </li>
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p><img src="https://img.shields.io/npm/v/arbiter-salesforce.svg" alt="npm" /><a href="https://github.com/facebook/jest"><img src="https://facebook.github.io/jest/img/jest-badge.svg" alt="jest" /></a></p>
+
+<p>Arbiter is a <a href="https://www.salesforce.com/">Salesforce</a> ORM for <a href="https://nodejs.org">Node.js</a> with the goal of making modeling and querying Salesforce as painless as possible. With powerful schemas for validation and field remappings, Arbiter is the perfect layer to have between you and Salesforce.</p>
+
+<p>Arbiter is built on top of the popular query library <a href="https://jsforce.github.io/">JSforce</a>. People familiar with its api will feel right at home in Arbiter&#39;s since most of the api is mirrored. Also, JSForce <a href="https://jsforce.github.io/document/#query">connection</a> objects are exposed providing escape hatches when needed, or an eased migration to Arbiter.</p>
+
+<p>What you get with Arbiter:</p>
+
+<ul>
+<li><strong>A Declarative way of defining models and <a href="#associations">associations</a> between them</strong></li>
+<li><strong>Extended query building API</strong>. JSForce with more helpers</li>
+<li><strong>Field remappings.</strong> No longer are you tied to your Salesforce field names. Create your own that are easier to reason about or matches your problem domain. <strong>Or just to strip out those darn underscores...</strong></li>
+<li><strong>Smart query results</strong>. Makes updating and creating new objects quick and easy</li>
+<li><strong>Optional field validation and defaults</strong></li>
+</ul>
+
+<p>What Arbiter <strong>doesn&#39;t</strong> give you:</p>
+
+<ul>
+<li><strong>A way to modify Salesforce objects and schemas</strong>. You will still need Salesforce devs to do that. The objects and relations have to be in place in order for Arbiter to query them.</li>
+<li><strong>Automatic loading of Salesforce schemas</strong>. Arbiter schemas must be writen by hand. This means that you don&#39;t have to follow your Salesforce setup exactly and allows you to map fields to completely different names to align with your problem domain. This could be seen as a downside but hopefully after trying the library you will appreciate the flexibility.</li>
+</ul>
+
+<p>Arbiter does everything it can to get you down the happy path of making queries and getting access to your Salesforce data. Many of the helpers and additions are to help handle edge cases and issues that come up when querying nested relations from Salesforce.</p>
+<h1 id='getting-started'>Getting Started</h1><h2 id='installation'>Installation</h2>
+<blockquote>
+<p>-S is a shorthand for --save</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>npm install -S arbiter-salesforce
+</code></pre>
+<p>Install using either npm or yarn.</p>
+<h2 id='define'>Define</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">Schema</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">arbiter</span>
+
+<span class="nx">arbiter</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
+  <span class="na">username</span><span class="p">:</span> <span class="s1">'Johnny English'</span><span class="p">,</span>
+  <span class="na">password</span><span class="p">:</span> <span class="s1">'Secret_Agent_Man'</span><span class="p">,</span>
+  <span class="na">connection</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">loginUrl</span><span class="p">:</span> <span class="s1">'http://login.salesforce.com'</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="c1">// create schema</span>
+<span class="kr">const</span> <span class="nx">opportunitySchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">oppName</span><span class="p">:</span> <span class="s1">'Name'</span><span class="p">,</span>
+  <span class="na">contract</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Schema</span><span class="p">(</span><span class="s1">'Contract'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">status</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">sf</span><span class="p">:</span> <span class="s1">'Status'</span><span class="p">,</span>
+      <span class="na">writable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="na">enum</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">'Active'</span><span class="p">,</span>
+        <span class="s1">'Inactive'</span><span class="p">,</span>
+        <span class="s1">'Suspended'</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+
+<span class="c1">// create model with schema</span>
+<span class="kr">const</span> <span class="nx">Opportunity</span> <span class="o">=</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="nx">opportunitySchema</span><span class="p">)</span>
+
+<span class="c1">// Give it a go!</span>
+<span class="nx">Opportunity</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="nx">contract</span><span class="p">.</span><span class="na">status</span><span class="p">:</span> <span class="s1">'Active'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">([</span><span class="s1">'oppName'</span><span class="p">,</span> <span class="s1">'contract.*'</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">throwIfNotFound</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">exec</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">opp</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// you have an opportunity!</span>
+  <span class="p">})</span>
+</code></pre>
+<p>To use Arbiter you will need to configure a connection to Salesforce. This only needs to happen once somewhere in your application. Arbiter will then maintain and monitor the connection and make it available to your models and their queries.</p>
+
+<p>After that you can build up a model by first creating a schema, which defines field mappings and validations, then adding it to the model.</p>
+
+<p>Then start querying!</p>
+<h1 id='schemas'>Schemas</h1><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// key: value for simple mapping of fields</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'Name'</span><span class="p">,</span>
+  <span class="c1">// expanded field definition when you</span>
+  <span class="c1">// need more than just mapping for a field</span>
+  <span class="na">description</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// mapping to salesforce</span>
+    <span class="na">sf</span><span class="p">:</span> <span class="s1">'Description'</span><span class="p">,</span>
+    <span class="c1">// if we want to be able to update field</span>
+    <span class="na">writable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="c1">// type validation when updating</span>
+    <span class="c1">// 'date', 'boolean', 'number', or 'string'</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s1">'string'</span>
+  <span class="p">},</span>
+  <span class="na">status</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">sf</span><span class="p">:</span> <span class="s1">'Status'</span><span class="p">,</span>
+    <span class="na">writable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="c1">// when only certain values are allowed</span>
+    <span class="na">enum</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s1">'Active'</span><span class="p">,</span>
+      <span class="s1">'Inactive'</span>
+    <span class="p">],</span>
+    <span class="c1">// when creating a new object and we don't specify value</span>
+    <span class="c1">// default to value, can also be a function!</span>
+    <span class="na">default</span><span class="p">:</span> <span class="s1">'Active'</span>
+  <span class="p">},</span>
+  <span class="na">customField</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">sf</span><span class="p">:</span> <span class="s1">'Custom_Field__c'</span><span class="p">,</span>
+    <span class="c1">// when creating a new object you have to supply this field</span>
+    <span class="c1">// or save will reject</span>
+    <span class="na">required</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">writable</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+<p><code>const schema = new arbiter.Schema(SalesforceObject, mappings)</code></p>
+
+<p>Schemas are the driving force behind how Arbiter queries work so they deserve to be talked about first. Simply put, they are mappings of fields from how you want to reference them to the actual name of the field in Salesforce. Beyond that you can configure them to allow updates and validations on fields.</p>
+
+<aside class="notice">
+Arbiter internally needs to references id's so schemas will automatically add <code>id: Id</code> for you.
+</aside>
+
+<p>The first argument when creating a schema is the name of the Salesforce object that will be queried. At nested levels the name is how the parent schema references that object. The second argument is the mappings for the fields you want to be able to query. Once you have defined the mapping, you never reference the field by its Salesforce name again. Arbiter takes care of mapping to the real value behind the scenes for you. You can also only query for fields that you have defined in your schema.</p>
+
+<p>Based on schema to the right we would be able to query for a <code>name</code> field which we cannot update or change. A <code>description</code> which is updateable, but must be a string. A <code>status</code> which is updateable but only to certain options, and <code>customField</code> which if we are creating a new Opportunity cannot be null.</p>
+
+<aside class="warning">
+Schemas are bypassed when doing raw JSForce queries. None of the validations or mappings will be called.
+</aside>
+<h2 id='nested-schemas'>Nested Schemas</h2>
+<blockquote>
+<p>Using nested definition</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'Name'</span><span class="p">,</span>
+  <span class="na">project</span><span class="p">:</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Project__c'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">status</span><span class="p">:</span> <span class="s1">'Status'</span><span class="p">,</span>
+    <span class="na">proposal</span><span class="p">:</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Proposal__c'</span><span class="p">,</span> <span class="p">{</span>
+      <span class="na">proposalStarted</span><span class="p">:</span> <span class="s1">'Proposal_Started__c'</span><span class="p">,</span>
+      <span class="na">propsoalCompleted</span><span class="p">:</span> <span class="s1">'Proposal_Completed__c'</span>
+    <span class="p">})</span>
+  <span class="p">})</span>
+<span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>uage with <code>schema.addChildSchema(key, schema)</code></p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">// create all schemas first</span>
+<span class="kr">const</span> <span class="nx">oppSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'Name'</span>
+<span class="p">})</span>
+<span class="kr">const</span> <span class="nx">projSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Project__c'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">status</span><span class="p">:</span> <span class="s1">'Status'</span>
+<span class="p">})</span>
+<span class="kr">const</span> <span class="nx">propSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Proposal__c'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">proposalStarted</span><span class="p">:</span> <span class="s1">'Proposal_Started__c'</span><span class="p">,</span>
+  <span class="na">proposalCompleted</span><span class="p">:</span> <span class="s1">'Proposal_Completed__c'</span>
+<span class="p">})</span>
+
+<span class="c1">// then add them to each other</span>
+<span class="nx">oppSchema</span><span class="p">.</span><span class="nx">addChildSchema</span><span class="p">(</span><span class="s1">'project'</span><span class="p">,</span> <span class="nx">projSchema</span><span class="p">)</span>
+<span class="nx">projSchema</span><span class="p">.</span><span class="nx">addChildSchema</span><span class="p">(</span><span class="s1">'proposal'</span><span class="p">,</span> <span class="nx">propSchema</span><span class="p">)</span>
+<span class="c1">// or add schemas at a path</span>
+<span class="c1">// the parts of the path have to exist</span>
+<span class="c1">// setting this before setting the project schema woudldn't work</span>
+<span class="nx">oppSchema</span><span class="p">.</span><span class="nx">addChildSchema</span><span class="p">(</span><span class="s1">'project.proposal'</span><span class="p">,</span> <span class="nx">propSchema</span><span class="p">)</span>
+</code></pre>
+<p>Arbiter allows schemas to be nested in each other. This nesting represents the relationships that you have defined in your company&#39;s Salesforce schema. By nesting schemas you are making it possible to query through relations just like you can in SOQL queries. As with regular fields the keys become the mapping to how we want to reference the relation.</p>
+
+<p>In the example we name all the nested schema names based off of how parent schema references them. In the code to the right we named the project <code>Project__c</code> because thats how our Opportunity references it. Even if really the <code>Project__c</code> is a <code>My_Company_Project__c</code> object in our Salesforce.</p>
+
+<p>There are two apis for defining nested schemas as shown on the right. Both styles outcomes are the exact same.</p>
+<h3 id='feature'>Feature</h3>
+<p>Lets say we do a query based on the schema to the right to get the <code>proposalCompleted</code> field off of the <code>proposal</code>. What if in our query the project doesn&#39;t actually exist for our Opportunity. This would normally lead to errors when you tried to read <code>opportunity.project.proposal.proposalCompleted</code> since the project doesn&#39;t exist.</p>
+
+<p>Arbiter will always scaffold out all the objects you request and place <code>null</code> in any fields you ask for. Then all the fields that come back from query will get filled in. This means you never need to check if objects exist along the path making defensive code a thing of the past. If you ever need to check to see if an object is not there then just look at its <code>id</code> property. If you see <code>null</code> you know that it does not exist.</p>
+<h1 id='models'>Models</h1>
+<p><code>const model = arbiter.model(NameForModel, schemaInstance)</code></p>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">aShema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'SalesforceObject'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">createdDate</span><span class="p">:</span> <span class="s1">'CreatedDate'</span><span class="p">,</span>
+  <span class="na">status</span><span class="p">:</span> <span class="s1">'Staus'</span>
+<span class="p">})</span>
+
+<span class="kr">const</span> <span class="nx">MyModel</span> <span class="o">=</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'MyModel'</span><span class="p">,</span> <span class="nx">aSchema</span><span class="p">)</span>
+
+<span class="nx">MyModel</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="s1">'Active'</span> <span class="p">})</span>
+  <span class="c1">// query instance methods</span>
+  <span class="p">.</span><span class="nx">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="s1">'-createdDate'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">exec</span><span class="p">()</span>
+
+<span class="c1">// stash complicated queries</span>
+<span class="nx">MyModel</span><span class="p">.</span><span class="nx">getByStatus</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="nx">status</span> <span class="p">}).</span><span class="nx">exec</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+<p>Models are the glue that take in a schema and allow you to start kicking off queries. They are just objects making them a great place to stash complicated queries. A query instance gets returned by calling any one of the find functions <code>find, findOne, findById, findByIds</code> on a model.</p>
+<h2 id='associations'>Associations</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">accountSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Account'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">description</span><span class="p">:</span> <span class="s1">'Description'</span><span class="p">,</span>
+  <span class="na">rating</span><span class="p">:</span> <span class="s1">'Rating'</span>
+<span class="p">})</span>
+
+<span class="kr">const</span> <span class="nx">Account</span> <span class="o">=</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'Account'</span><span class="p">,</span> <span class="nx">accountSchema</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">oppSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">accountId</span><span class="p">:</span> <span class="s1">'AccountId'</span><span class="p">,</span>
+  <span class="na">status</span><span class="p">:</span> <span class="s1">'Status'</span>
+<span class="p">})</span>
+
+<span class="kr">const</span> <span class="nx">Opportunity</span> <span class="o">=</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="nx">oppSchema</span><span class="p">)</span>
+
+<span class="c1">// normally we wouldn't be able to get fields off of</span>
+<span class="c1">// account through the Opportunity</span>
+<span class="c1">// but with Arbiter we can</span>
+
+<span class="nx">Opportunity</span><span class="p">.</span><span class="nx">setAssocitions</span><span class="p">({</span>
+  <span class="c1">// the name we want to give the association</span>
+  <span class="c1">// this comes into play later when we ask to get it</span>
+  <span class="na">account</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// what field on the current model do you join on</span>
+    <span class="na">from</span><span class="p">:</span> <span class="s1">'accountId'</span><span class="p">,</span>
+    <span class="c1">// what field on the other object do you join on</span>
+    <span class="c1">// IMPORTANT this still using the mapping of the field</span>
+    <span class="na">to</span><span class="p">:</span> <span class="s1">'id'</span><span class="p">,</span>
+    <span class="c1">// what model to use for second query</span>
+    <span class="na">model</span><span class="p">:</span> <span class="nx">Account</span>
+    <span class="c1">// hasOne for when theres only one</span>
+    <span class="c1">// hasMany when it should be an array</span>
+    <span class="na">relation</span><span class="p">:</span> <span class="nx">Opportunity</span><span class="p">.</span><span class="nx">relations</span><span class="p">.</span><span class="nx">hasOne</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="nx">Opportunity</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="s1">'Open'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="kd">with</span><span class="p">(</span><span class="s1">'account'</span><span class="p">,</span> <span class="nx">accountQuery</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">accountQuery</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'rating'</span><span class="p">)</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">exec</span><span class="p">()</span>
+
+<span class="c1">// or</span>
+<span class="nx">Opportunity</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="s1">'Open'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="kd">with</span><span class="p">({</span>
+    <span class="na">account</span><span class="p">:</span> <span class="nx">accountQuery</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">accountQuery</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'rating'</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>The above will return an result shaped like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some id..."</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some rating"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Nested Schemas are powerful because they allow you to query through relations in one query and get the results you need. What do you do when you have a reference to another object but you can&#39;t query through it? Thats where associations come in. They allow you to describe to Arbiter how to do the joins and then Arbiter will make the queries and handle zipping the results together. Multiple queries still need to happen to get the data, but it can be a lifesaver to not have to write the manual code to do this yourself.</p>
+
+<blockquote>
+<p>Just showing off</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">Case</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="kd">with</span><span class="p">({</span>
+    <span class="na">comments</span><span class="p">:</span> <span class="nx">commentsQuery</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">commentsQuery</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'*'</span><span class="p">)</span>
+        <span class="p">.</span><span class="kd">with</span><span class="p">(</span><span class="s1">'owner'</span><span class="p">,</span> <span class="nx">ownerQuery</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">ownerQuery</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'firstName'</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="p">},</span>
+    <span class="na">recordType</span><span class="p">:</span> <span class="nx">recordTypeQuery</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">recordTypeQuery</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">exec</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>That would result in this, only showing one result</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some case Id"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"recordType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A RecordType name"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some comment id"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The guy was talking...."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Peter"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>Whats even more impressive is that you can call off multiple associations at once and/or call associations on your assocations. This all is kicked off by calling <code>model.with()</code></p>
+<h1 id='raw-jsforce-queries'>Raw JSForce Queries</h1>
+<blockquote>
+<p>Raw connection object</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+
+<span class="nx">arbiter</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">conn</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// raw jsforce connection object</span>
+  <span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>model.sobject() call</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">Opportunity</span> <span class="o">=</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="nx">aSchema</span><span class="p">)</span>
+
+<span class="nx">Opportunity</span><span class="p">.</span><span class="nx">sobject</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">sobject</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// same as conn.sobject('whatever schema points to').then(...)</span>
+  <span class="p">})</span>
+</code></pre>
+<p>Arbiter is built using JSForce behind the scenes. After it maps your values to what they really are it builds up a JSForce query. If for whatever reason you need to use a plain old JSForce query. They are available to you. <strong>Keep in mind that when using raw queries you are not going through the schema and you will not receive back prettied results, or even smart objects. You are right back in JSForce land.</strong></p>
+
+<aside class="warning">
+Be sure to have your connection configured before trying to execute queries!
+</aside>
+<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all kittens.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://example.com/api/kittens</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>include_cats</td>
+<td>false</td>
+<td>If set to true, the result will also include cats.</td>
+</tr>
+<tr>
+<td>available</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a specific kitten.</p>
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the kitten to retrieve</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+  -X DELETE
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint deletes a specific kitten.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the kitten to delete</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<aside class="notice">
+This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified kitten could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone -- The kitten requested has been removed from our servers.</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&#39;m a teapot.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
