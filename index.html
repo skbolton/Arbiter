@@ -6,6 +6,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Arbiter-Salesforce</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
 
     <style>
       .highlight table td { padding: 5px; }
@@ -246,28 +247,123 @@
               </ul>
           </li>
           <li>
-            <a href="#raw-jsforce-queries" class="toc-h1 toc-link" data-title="raw-jsforce-queries">Raw JSForce Queries</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="kittens">Kittens</a>
+            <a href="#grunts" class="toc-h1 toc-link" data-title="grunts">Grunts</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="get-all-kittens">Get All Kittens</a>
-                  </li>
-                  <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="get-a-specific-kitten">Get a Specific Kitten</a>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="delete-a-specific-kitten">Delete a Specific Kitten</a>
+                    <a href="#nested-mutations" class="toc-h2 toc-link" data-title="nested-mutations">Nested mutations</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="errors">Errors</a>
+            <a href="#raw-jsforce-queries" class="toc-h1 toc-link" data-title="raw-jsforce-queries">Raw JSForce Queries</a>
+          </li>
+          <li>
+            <a href="#recipe-book" class="toc-h1 toc-link" data-title="recipe-book">Recipe Book</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#composable-queries" class="toc-h2 toc-link" data-title="composable-queries">Composable queries</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#api-reference" class="toc-h1 toc-link" data-title="api-reference">API Reference</a>
+          </li>
+          <li>
+            <a href="#arbiter" class="toc-h1 toc-link" data-title="arbiter">Arbiter</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#configure" class="toc-h2 toc-link" data-title="configure">configure</a>
+                  </li>
+                  <li>
+                    <a href="#getconnection" class="toc-h2 toc-link" data-title="getconnection">getConnection</a>
+                  </li>
+                  <li>
+                    <a href="#model" class="toc-h2 toc-link" data-title="model">model</a>
+                  </li>
+                  <li>
+                    <a href="#schema" class="toc-h2 toc-link" data-title="schema">Schema</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#model-2" class="toc-h1 toc-link" data-title="model">Model</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#sobject" class="toc-h2 toc-link" data-title="sobject">sobject</a>
+                  </li>
+                  <li>
+                    <a href="#setassociations" class="toc-h2 toc-link" data-title="setassociations">setAssociations</a>
+                  </li>
+                  <li>
+                    <a href="#new" class="toc-h2 toc-link" data-title="new">new</a>
+                  </li>
+                  <li>
+                    <a href="#find" class="toc-h2 toc-link" data-title="find">find</a>
+                  </li>
+                  <li>
+                    <a href="#findone" class="toc-h2 toc-link" data-title="findone">findOne</a>
+                  </li>
+                  <li>
+                    <a href="#findbyid" class="toc-h2 toc-link" data-title="findbyid">findById</a>
+                  </li>
+                  <li>
+                    <a href="#findbyids" class="toc-h2 toc-link" data-title="findbyids">findByIds</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#query" class="toc-h1 toc-link" data-title="query">Query</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#select" class="toc-h2 toc-link" data-title="select">select</a>
+                  </li>
+                  <li>
+                    <a href="#fields" class="toc-h2 toc-link" data-title="fields">fields</a>
+                  </li>
+                  <li>
+                    <a href="#where" class="toc-h2 toc-link" data-title="where">where</a>
+                  </li>
+                  <li>
+                    <a href="#limit" class="toc-h2 toc-link" data-title="limit">limit</a>
+                  </li>
+                  <li>
+                    <a href="#skip" class="toc-h2 toc-link" data-title="skip">skip</a>
+                  </li>
+                  <li>
+                    <a href="#offset" class="toc-h2 toc-link" data-title="offset">offset</a>
+                  </li>
+                  <li>
+                    <a href="#sort" class="toc-h2 toc-link" data-title="sort">sort</a>
+                  </li>
+                  <li>
+                    <a href="#first" class="toc-h2 toc-link" data-title="first">first</a>
+                  </li>
+                  <li>
+                    <a href="#with" class="toc-h2 toc-link" data-title="with">with</a>
+                  </li>
+                  <li>
+                    <a href="#throwifnotfound" class="toc-h2 toc-link" data-title="throwifnotfound">throwIfNotFound</a>
+                  </li>
+                  <li>
+                    <a href="#allowmutations" class="toc-h2 toc-link" data-title="allowmutations">allowMutations</a>
+                  </li>
+                  <li>
+                    <a href="#rejectmuations" class="toc-h2 toc-link" data-title="rejectmuations">rejectMuations</a>
+                  </li>
+                  <li>
+                    <a href="#execute" class="toc-h2 toc-link" data-title="execute">execute</a>
+                  </li>
+                  <li>
+                    <a href="#exec" class="toc-h2 toc-link" data-title="exec">exec</a>
+                  </li>
+                  <li>
+                    <a href="#then" class="toc-h2 toc-link" data-title="then">then</a>
+                  </li>
+              </ul>
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li>Made with ❤️ <a href="https://github.com/skbolton" target="_blank">@skbolton</a></li>
             <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -275,11 +371,13 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p><img src="https://img.shields.io/npm/v/arbiter-salesforce.svg" alt="npm" /><a href="https://github.com/facebook/jest"><img src="https://facebook.github.io/jest/img/jest-badge.svg" alt="jest" /></a></p>
+<p><img src="https://img.shields.io/npm/v/arbiter-salesforce.svg" alt="npm" /><a href="https://coveralls.io/github/skbolton/Arbiter?branch=2.0"><img src="https://coveralls.io/repos/github/skbolton/Arbiter/badge.svg?branch=2.0" alt="Coverage Status" /></a><img src="https://travis-ci.org/skbolton/Arbiter.svg?branch=2.0" alt="Build" /></p>
 
-<p>Arbiter is a <a href="https://www.salesforce.com/">Salesforce</a> ORM for <a href="https://nodejs.org">Node.js</a> with the goal of making modeling and querying Salesforce as painless as possible. With powerful schemas for validation and field remappings, Arbiter is the perfect layer to have between you and Salesforce.</p>
+<p><a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a></p>
 
-<p>Arbiter is built on top of the popular query library <a href="https://jsforce.github.io/">JSforce</a>. People familiar with its api will feel right at home in Arbiter&#39;s since most of the api is mirrored. Also, JSForce <a href="https://jsforce.github.io/document/#query">connection</a> objects are exposed providing escape hatches when needed, or an eased migration to Arbiter.</p>
+<p>Arbiter is a <a href="https://www.salesforce.com/" target="_blank">Salesforce</a> ORM for <a href="https://nodejs.org" target="_blank">Nodejs</a> with the goal of making modeling and querying Salesforce as painless as possible. With powerful schemas for validation and field remappings, Arbiter is the perfect layer to have between you and Salesforce.</p>
+
+<p>Arbiter is built on top of the popular <a href="https://jsforce.github.io/" target="_blank">JSforce</a> query library. People familiar with its api will feel right at home in Arbiter since most of the api is mirrored. Also, JSForce <a href="https://jsforce.github.io/document/#query" target="_blank">connection</a> objects are exposed providing escape hatches when needed, or an eased migration to Arbiter.</p>
 
 <p>What you get with Arbiter:</p>
 
@@ -287,7 +385,7 @@
 <li><strong>A Declarative way of defining models and <a href="#associations">associations</a> between them</strong></li>
 <li><strong>Extended query building API</strong>. JSForce with more helpers</li>
 <li><strong>Field remappings.</strong> No longer are you tied to your Salesforce field names. Create your own that are easier to reason about or matches your problem domain. <strong>Or just to strip out those darn underscores...</strong></li>
-<li><strong>Smart query results</strong>. Makes updating and creating new objects quick and easy</li>
+<li><a href="#grunts"><strong>Smart query results</strong></a>. Makes updating and creating new objects quick and easy</li>
 <li><strong>Optional field validation and defaults</strong></li>
 </ul>
 
@@ -298,7 +396,7 @@
 <li><strong>Automatic loading of Salesforce schemas</strong>. Arbiter schemas must be writen by hand. This means that you don&#39;t have to follow your Salesforce setup exactly and allows you to map fields to completely different names to align with your problem domain. This could be seen as a downside but hopefully after trying the library you will appreciate the flexibility.</li>
 </ul>
 
-<p>Arbiter does everything it can to get you down the happy path of making queries and getting access to your Salesforce data. Many of the helpers and additions are to help handle edge cases and issues that come up when querying nested relations from Salesforce.</p>
+<p>Arbiter does everything it can to get you down the happy path of making queries and getting access to your Salesforce data. Many of the helpers and additions are to help handle edge that arise when querying nested relations from Salesforce.</p>
 <h1 id='getting-started'>Getting Started</h1><h2 id='installation'>Installation</h2>
 <blockquote>
 <p>-S is a shorthand for --save</p>
@@ -337,7 +435,7 @@
 <span class="kr">const</span> <span class="nx">Opportunity</span> <span class="o">=</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="nx">opportunitySchema</span><span class="p">)</span>
 
 <span class="c1">// Give it a go!</span>
-<span class="nx">Opportunity</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="nx">contract</span><span class="p">.</span><span class="na">status</span><span class="p">:</span> <span class="s1">'Active'</span> <span class="p">})</span>
+<span class="nx">Opportunity</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="s1">'contract.status'</span><span class="p">:</span> <span class="s1">'Active'</span> <span class="p">})</span>
   <span class="p">.</span><span class="nx">select</span><span class="p">([</span><span class="s1">'oppName'</span><span class="p">,</span> <span class="s1">'contract.*'</span><span class="p">])</span>
   <span class="p">.</span><span class="nx">throwIfNotFound</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">exec</span><span class="p">()</span>
@@ -349,11 +447,11 @@
 
 <p>After that you can build up a model by first creating a schema, which defines field mappings and validations, then adding it to the model.</p>
 
-<p>Then start querying!</p>
+<p>Then you are ready to start writing queries.</p>
 <h1 id='schemas'>Schemas</h1><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{</span>
   <span class="c1">// key: value for simple mapping of fields</span>
   <span class="na">name</span><span class="p">:</span> <span class="s1">'Name'</span><span class="p">,</span>
-  <span class="c1">// expanded field definition when you</span>
+  <span class="c1">// field definition when you</span>
   <span class="c1">// need more than just mapping for a field</span>
   <span class="na">description</span><span class="p">:</span> <span class="p">{</span>
     <span class="c1">// mapping to salesforce</span>
@@ -385,7 +483,7 @@
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre>
-<p><code>const schema = new arbiter.Schema(SalesforceObject, mappings)</code></p>
+<p><code>const schema = new arbiter.Schema(SFObject, mappings)</code></p>
 
 <p>Schemas are the driving force behind how Arbiter queries work so they deserve to be talked about first. Simply put, they are mappings of fields from how you want to reference them to the actual name of the field in Salesforce. Beyond that you can configure them to allow updates and validations on fields.</p>
 
@@ -393,7 +491,7 @@
 Arbiter internally needs to references id's so schemas will automatically add <code>id: Id</code> for you.
 </aside>
 
-<p>The first argument when creating a schema is the name of the Salesforce object that will be queried. At nested levels the name is how the parent schema references that object. The second argument is the mappings for the fields you want to be able to query. Once you have defined the mapping, you never reference the field by its Salesforce name again. Arbiter takes care of mapping to the real value behind the scenes for you. You can also only query for fields that you have defined in your schema.</p>
+<p>The first argument when creating a schema is the name of the Salesforce object that will be queried. At nested levels the name is how the parent schema references that object. The second argument is the mappings for the fields you want to be able to query. Once you have defined the mapping, you <strong>never</strong> reference the field by its Salesforce name again. Arbiter takes care of mapping to the real value behind the scenes for you. You can also only query for fields that you have defined in your schema.</p>
 
 <p>Based on schema to the right we would be able to query for a <code>name</code> field which we cannot update or change. A <code>description</code> which is updateable, but must be a string. A <code>status</code> which is updateable but only to certain options, and <code>customField</code> which if we are creating a new Opportunity cannot be null.</p>
 
@@ -416,7 +514,7 @@ Schemas are bypassed when doing raw JSForce queries. None of the validations or 
 <span class="p">})</span>
 </code></pre>
 <blockquote>
-<p>uage with <code>schema.addChildSchema(key, schema)</code></p>
+<p>Usage with <code>schema.addChildSchema(key, schema)</code></p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="c1">// create all schemas first</span>
 <span class="kr">const</span> <span class="nx">oppSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{</span>
@@ -444,7 +542,7 @@ Schemas are bypassed when doing raw JSForce queries. None of the validations or 
 
 <p>There are two apis for defining nested schemas as shown on the right. Both styles outcomes are the exact same.</p>
 <h3 id='feature'>Feature</h3>
-<p>Lets say we do a query based on the schema to the right to get the <code>proposalCompleted</code> field off of the <code>proposal</code>. What if in our query the project doesn&#39;t actually exist for our Opportunity. This would normally lead to errors when you tried to read <code>opportunity.project.proposal.proposalCompleted</code> since the project doesn&#39;t exist.</p>
+<p>Lets say we do a query based on the schema to the right to get the <code>proposalCompleted</code> field off of the <code>proposal</code>. What if in our query the project doesn&#39;t actually exist for our Opportunity? This would normally lead to errors when you tried to read <code>opportunity.project.proposal.proposalCompleted</code> since the project doesn&#39;t exist.</p>
 
 <p>Arbiter will always scaffold out all the objects you request and place <code>null</code> in any fields you ask for. Then all the fields that come back from query will get filled in. This means you never need to check if objects exist along the path making defensive code a thing of the past. If you ever need to check to see if an object is not there then just look at its <code>id</code> property. If you see <code>null</code> you know that it does not exist.</p>
 <h1 id='models'>Models</h1>
@@ -467,7 +565,16 @@ Schemas are bypassed when doing raw JSForce queries. None of the validations or 
   <span class="k">return</span> <span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="nx">status</span> <span class="p">}).</span><span class="nx">exec</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
-<p>Models are the glue that take in a schema and allow you to start kicking off queries. They are just objects making them a great place to stash complicated queries. A query instance gets returned by calling any one of the find functions <code>find, findOne, findById, findByIds</code> on a model.</p>
+<p>Models are the glue that bring schemas and queries together. They are just objects making them a great place to stash complicated queries.</p>
+
+<p>A query instance gets returned by calling any one of the model&#39;s find functions</p>
+
+<ul>
+<li><a href="#find">find</a></li>
+<li><a href="#findone">findOne</a></li>
+<li><a href="#findbyid">findById</a></li>
+<li><a href="#findbyids">findByIds</a></li>
+</ul>
 <h2 id='associations'>Associations</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">accountSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Account'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">description</span><span class="p">:</span> <span class="s1">'Description'</span><span class="p">,</span>
   <span class="na">rating</span><span class="p">:</span> <span class="s1">'Rating'</span>
@@ -527,13 +634,15 @@ Schemas are bypassed when doing raw JSForce queries. None of the validations or 
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Nested Schemas are powerful because they allow you to query through relations in one query and get the results you need. What do you do when you have a reference to another object but you can&#39;t query through it? Thats where associations come in. They allow you to describe to Arbiter how to do the joins and then Arbiter will make the queries and handle zipping the results together. Multiple queries still need to happen to get the data, but it can be a lifesaver to not have to write the manual code to do this yourself.</p>
+<p>Nested Schemas are powerful because they allow you to query through relations in one query and get the results you need. What do you do when you have a reference to another object but you can&#39;t query through it? Thats were associations come in. They allow you to describe to Arbiter how to do the joins and then Arbiter will make the queries and handle zipping the results together. Multiple queries still need to happen to get the data, but it can be a lifesaver to not have to write the manual code to do this yourself.</p>
 
 <blockquote>
 <p>Just showing off</p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="nx">Case</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="c1">// grab the comments for the cases we find</span>
+  <span class="c1">// for every comment also go fetch the owner of the comment</span>
   <span class="p">.</span><span class="kd">with</span><span class="p">({</span>
     <span class="na">comments</span><span class="p">:</span> <span class="nx">commentsQuery</span> <span class="o">=&gt;</span> <span class="p">{</span>
       <span class="nx">commentsQuery</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'*'</span><span class="p">)</span>
@@ -568,7 +677,63 @@ Schemas are bypassed when doing raw JSForce queries. None of the validations or 
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>Whats even more impressive is that you can call off multiple associations at once and/or call associations on your assocations. This all is kicked off by calling <code>model.with()</code></p>
+<p>Whats even more impressive is that you can call off multiple associations at once and/or call associations on your assocations. This all is kicked off by calling <a href="#with"><code>query.with()</code></a></p>
+<h1 id='grunts'>Grunts</h1>
+<blockquote>
+<p>Assuming that status is a writable field and passes validation defined in schema</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="s1">'Open'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'status'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">exec</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">grunt</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// we can add other fields to the grunt that are not in the schema</span>
+    <span class="c1">// these will not get sent with any saves</span>
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">extraField</span> <span class="o">=</span> <span class="s1">'Some extra field on grunt'</span>
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">'Closed'</span>
+    <span class="k">return</span> <span class="nx">grunt</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">savedGrunt</span> <span class="o">=&gt;</span> <span class="p">{...})</span>
+</code></pre>
+<blockquote>
+<p>Updating many grunts</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">isActive</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nx">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">grunts</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">updates</span> <span class="o">=</span> <span class="nx">grunts</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">grunt</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">grunt</span><span class="p">.</span><span class="nx">isActive</span> <span class="o">=</span> <span class="kc">false</span>
+      <span class="k">return</span> <span class="nx">grunt</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">updates</span><span class="p">)</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">updatedGrunts</span> <span class="o">=&gt;</span> <span class="p">{...})</span>
+</code></pre>
+<p>Grunts are objects returned by queries. For the most part you can use them just like regular objects, but they do have some tricks up their sleeves.</p>
+
+<p>Grunts are <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxied</a> objects. The handler for a grunt is aware of what fields are <code>writable</code> in the schema and will run validations and mappings as you mutate writable fields on a grunt. Grunts are not limited to only fields that came back from a query or are in the schema. Feel free to add whatever additional fields you want and use grunts as transfer objects. The handler will make sure to keep track of only the updates that are <code>writable</code> and that have passed your validations as defined in the schema. The benefit of the approach is that you don&#39;t pay a cost for having these smart objects. If you only want to use them for their query power and not do mutations there is no slow down in performance. It also means you can query for 100&#39;s of grunts and it won&#39;t affect your query performance either.</p>
+
+<p>You won&#39;t interface directly with the handler, but knowing it&#39;s there and what it is doing will make it easier to reason about what is happening. To update Salesforce with the writable changes on a grunt simply call <code>grunt.save()</code>. Any errors in your mutations will show up in the catch of the returned promise. The resolved value of the promise is the grunt itself.</p>
+
+<aside class="notice">
+  If calling save creates a new grunt then the saved grunt that comes back will have a new <code>id</code> field on it.
+</aside>
+<h2 id='nested-mutations'>Nested mutations</h2>
+<blockquote>
+<p>Updating nested values</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">findOne</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'account.contract.createdDate'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">grunt</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// we want to update the createdDate which is nested</span>
+    <span class="c1">// since an id is present, calling save will do an update</span>
+    <span class="kr">const</span> <span class="nx">contractGrunt</span> <span class="o">=</span> <span class="nx">contractModel</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="nx">grunt</span><span class="p">.</span><span class="nx">contract</span><span class="p">)</span>
+    <span class="nx">contractGrunt</span><span class="p">.</span><span class="nx">createdDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nx">contractGrunt</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+  <span class="p">})</span>
+</code></pre>
+<p>While models are able to query into nested relations the grunts they produce are not responsible to update the nested values. The grunts will have all the fields on them that you asked for, they just aren&#39;t responsible to save all of them. In order to update nested fields you will need to make a new grunt out of the data you want through the <a href="#new"><code>model.new()</code></a> api and then mutate and save the changes. If grunts have an <code>id</code> property they will call update, if no <code>id</code> is present on a grunt it will call a create query.</p>
+
+<p>This is in part to make error handling and ordering of the saves explicit. If Arbiter allowed grunts to save every nested level on them it would be hard to imagine a clean api when an error occurred while saving.</p>
 <h1 id='raw-jsforce-queries'>Raw JSForce Queries</h1>
 <blockquote>
 <p>Raw connection object</p>
@@ -590,202 +755,517 @@ Schemas are bypassed when doing raw JSForce queries. None of the validations or 
     <span class="c1">// same as conn.sobject('whatever schema points to').then(...)</span>
   <span class="p">})</span>
 </code></pre>
-<p>Arbiter is built using JSForce behind the scenes. After it maps your values to what they really are it builds up a JSForce query. If for whatever reason you need to use a plain old JSForce query. They are available to you. <strong>Keep in mind that when using raw queries you are not going through the schema and you will not receive back prettied results, or even smart objects. You are right back in JSForce land.</strong></p>
+<p>Arbiter is built using JSForce behind the scenes. After it maps your values to what they really are it builds up a JSForce query. If for whatever reason you need to use a regular JSForce query, they are available to you. <strong>Keep in mind that when using raw queries you are not going through the schema and will not receive back prettied results, or even grunts. This is a direct call into JSForce api and what they return.</strong></p>
 
 <aside class="warning">
 Be sure to have your connection configured before trying to execute queries!
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<h1 id='recipe-book'>Recipe Book</h1><h2 id='composable-queries'>Composable queries</h2>
+<blockquote>
+<p>Returning the query instance for additional modification</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforc'</span><span class="p">)</span>
+<span class="c1">// leaving out schema details for brevity</span>
+<span class="kr">const</span> <span class="nx">oppSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Case'</span><span class="p">,</span> <span class="p">{})</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<span class="kr">const</span> <span class="nx">Case</span> <span class="o">=</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'Case'</span><span class="p">,</span> <span class="nx">oppSchema</span><span class="p">)</span>
+
+<span class="c1">// Notice that by calling find and where</span>
+<span class="c1">// that we are adding up the state of the two</span>
+<span class="c1">// one doesn't overwrite the other unless they</span>
+<span class="c1">// contain the same field</span>
+<span class="nx">Case</span><span class="p">.</span><span class="nx">byStatus</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">status</span><span class="p">,</span> <span class="nx">whereClauses</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">Case</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="nx">status</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'*'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="nx">whereClauses</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+<p>A lot of flexibility is available by leveraging the composabilty of queries. Since their state is cumulative you can accept outside input and add it to the query. We have also found that it is advantageous to not execute the query inside a function attached to the model. By returning the query you allow the outside world to attach more fields and other query state to shape the query different for their needs. Doing this will make a lot more of your queries reusable in other places in your app and trims down on code.</p>
+
+<p>This is not always possible and sometimes you have to execute queries in order to supply the right data or maybe you don&#39;t want the abstraction of the query to show up outside of the model. But if you find yourself seeing an existing query that is very close to what you need consider changing your apis to this style and being more extensible.</p>
+<h1 id='api-reference'>API Reference</h1><h1 id='arbiter'>Arbiter</h1>
+<p>The main import of the library houses the manager of the connection to Salesforce as well as a place to define Schemas and models. It is also where you go to kick off a JSForce query.</p>
+<h2 id='configure'>configure</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+<span class="c1">// showing required fields</span>
+<span class="nx">arbiter</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
+  <span class="na">username</span><span class="p">:</span> <span class="s1">'Johnny English'</span><span class="p">,</span>
+  <span class="na">password</span><span class="p">:</span> <span class="s1">'Secret_Agent_Man'</span><span class="p">,</span>
+  <span class="na">connection</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">loginUrl</span><span class="p">:</span> <span class="s1">'https://login.salesforce.com'</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+<p>Sets up connection to Salesforce. It needs to happen somewhere in your application one time. You are free to define models and Schemas before it is configured, but it most be done before you attempt a query.</p>
+<h3 id='arguments'>Arguments</h3>
+<ul>
+<li><code>opts</code> (object) - The options to configure connection
+
+<ul>
+<li><code>username</code> (string) - username for connection</li>
+<li><code>password</code> (string) - password for connection</li>
+<li><code>maxConnectionTime</code> (number) [defaut:21600000] - number of milliseconds before refreshing connection</li>
+<li><code>connection</code> (object) - Anything valid passed to <a href="http://jsforce.github.io/jsforce/doc/Connection.html" target="_blank">new jsforce.Connection()</a>
+
+<ul>
+<li><code>loginUrl</code> (string) - Url to login. Only required field on <code>connection</code>.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id='return-value'>Return Value</h3>
+<p><code>undefined</code></p>
+<h2 id='getconnection'>getConnection</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+
+<span class="nx">arbiter</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">conn</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="cm">/*
+      You have a jsforce connection
+    */</span>
+  <span class="p">})</span>
+</code></pre>
+<p>Gets connection to salesforce. This is a JSForce connection and any queries done through this connection will not have any mappings or validations from the schema. Use this as an escape hatch or while migrating to Arbiter. <strong>Arbiter uses the same connection throughout all of its queries so any changes to the connection here will show up everywhere until the connection expires as defined in the call to <code>arbiter.configure()</code></strong></p>
+<h3 id='arguments-2'>Arguments</h3>
+<p>None</p>
+<h3 id='return-value-2'>Return Value</h3>
+<p><a href="http://jsforce.github.io/jsforce/doc/Connection.html">JSForce</a> Connection instance</p>
+<h2 id='model'>model</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">schemaInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{...})</span>
+<span class="kr">const</span> <span class="nx">model</span> <span class="o">=</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'SomeName'</span><span class="p">,</span> <span class="nx">schemaInstance</span><span class="p">)</span>
+</code></pre>
+<p>Creates a new <a href="#models">model</a> instance</p>
+<h3 id='arguments-3'>Arguments</h3>
+<ul>
+<li><code>name</code> (string) - name for the model, this will show up in debugging and errors.</li>
+<li><code>schema</code> (<a href="#schemas">Schema</a>) - a Schema instance to query against</li>
+</ul>
+<h3 id='return-value-3'>Return Value</h3>
+<p><code>model</code></p>
+<h2 id='schema'>Schema</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">status</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">sf</span><span class="p">:</span> <span class="s1">'Status'</span><span class="p">,</span>
+    <span class="na">writable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">enum</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s1">'Active'</span><span class="p">,</span>
+      <span class="s1">'Inactive'</span><span class="p">,</span>
+      <span class="s1">'Suspended'</span>
+    <span class="p">],</span>
+    <span class="na">default</span><span class="p">:</span> <span class="s1">'Active'</span>
+  <span class="p">},</span>
+  <span class="na">accountId</span><span class="p">:</span> <span class="s1">'AccountId'</span>
+<span class="p">})</span>
+</code></pre>
+<p>Creates a <a href="#schemas">schema</a> instance defining mapping and validation for fields.</p>
+<h3 id='arguments-4'>Arguments</h3>
+<ul>
+<li><code>salesforceObject</code> (string) - name of salesforce object the schema is a reference to.</li>
+<li><code>config</code> (object) - configuration for fields of schema</li>
+</ul>
+
+<p>The fields of the config can either be simple <code>key: value</code> pairings which sets the key as the way you want to reference the field. The value can also be an object in order to extend the configuration. All the possible values are shown in example to right.</p>
+
+<blockquote>
+<p>Expanded config for a field in schema config</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="c1">// only required field</span>
+  <span class="nl">sf</span><span class="p">:</span> <span class="s1">'Some_Salesforce_Field__c'</span><span class="p">,</span>
+  <span class="c1">// boolean, date, string, number</span>
+  <span class="nx">type</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+  <span class="c1">// must be one of these</span>
+  <span class="kr">enum</span><span class="p">:</span> <span class="p">[</span> <span class="kc">null</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="s1">'value2'</span> <span class="p">],</span>
+  <span class="c1">// we want to be able to have grunts update this field</span>
+  <span class="nx">writable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="c1">// when saving a new object this field cannot be null/undefined</span>
+  <span class="nx">required</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="c1">// defaults, this makes having required redundant since it will always</span>
+  <span class="c1">// be there because of this having a default</span>
+  <span class="k">default</span><span class="p">:</span> <span class="s1">'A Default'</span><span class="p">,</span>
+  <span class="c1">// can also be a function</span>
+  <span class="k">default</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">'A default'</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h1 id='model-2'>Model</h1>
+<p>An object that can get connections from pool and kick off queries.</p>
+<h2 id='sobject'>sobject</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">sobject</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">sobject</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">sobject</span><span class="p">.</span><span class="nx">find</span><span class="p">(...)</span>
+  <span class="p">})</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Same as calling</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
+<pre class="highlight javascript"><code><span class="nx">arbiter</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">conn</span> <span class="o">=&gt;</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">sobject</span><span class="p">(</span><span class="s1">'SomeSObject'</span><span class="p">))</span>
+</code></pre>
+<p>Gets a JSForce connection and sets that connection to the sobject that the model is linked to. This is found out by looking at the schema that was added to the model.</p>
+<h3 id='argumens'>Argumens</h3>
+<p>None</p>
+<h3 id='return-value-4'>Return Value</h3>
+<p><a href="http://jsforce.github.io/jsforce/doc/SObject.html" target="_blank">JSForce</a> SObject instance</p>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<aside class="warning">
+This is a raw JSForce connection and any queries done through this will not have schema mappings or validation in place.
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='setassociations'>setAssociations</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">setAssocations</span><span class="p">({</span>
+  <span class="na">singeAssociation</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">from</span><span class="p">:</span> <span class="s1">'a field on me'</span><span class="p">,</span>
+    <span class="na">to</span><span class="p">:</span> <span class="s1">'a field on them'</span><span class="p">,</span>
+    <span class="na">model</span><span class="p">:</span> <span class="nx">SomeOtherModel</span><span class="p">,</span>
+    <span class="c1">// this field should be a single value</span>
+    <span class="na">relation</span><span class="p">:</span> <span class="nx">model</span><span class="p">.</span><span class="nx">relations</span><span class="p">.</span><span class="nx">hasOne</span>
+  <span class="p">},</span>
+  <span class="na">pluralAssocation</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">from</span><span class="p">:</span> <span class="s1">'a field on me'</span><span class="p">,</span>
+    <span class="na">to</span><span class="p">:</span> <span class="s1">'a field on them'</span><span class="p">,</span>
+    <span class="na">model</span><span class="p">:</span> <span class="nx">SomeModel</span><span class="p">,</span>
+    <span class="c1">// this field should be an array of things</span>
+    <span class="na">relation</span><span class="p">:</span> <span class="nx">model</span><span class="p">.</span><span class="nx">relations</span><span class="p">.</span><span class="nx">hasMany</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+<p>Assocations are a way to have Arbiter be able to execute multiple queries and join the results together. In your Salesforce you will most likely have many relationships that allow you to do queries across relations. Associations are for the cases where you cannot traverse the relationship and instead would have to do multiple queries to get the data for associated objects. Using this api allows you to show models how to do the &quot;joins&quot; in order to get all the data.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>The keys of the object become the name of the association you can ask for later when you call <a href="#query"><code>query.with()</code></a></p>
+<h3 id='arguments-5'>Arguments</h3>
+<ul>
+<li><code>associations</code> (object) - Associations to add to the model
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<ul>
+<li><code>from</code> (string) - Field on current model to start from</li>
+<li><code>to</code> (string) - Field on associated model to join on</li>
+<li><code>model</code> (model) - Model to execute next query</li>
+<li><code>relation</code> (string) - [hasOne| hasMany] - Signify whether association is single entity or many things.</li>
+</ul></li>
+</ul>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<p>For convenience models have a <code>relations.hasMany</code> and <code>relations.hasOne</code> property on them that point to the respective strings.</p>
+<h3 id='return-value-5'>Return Value</h3>
+<p><code>undefined</code></p>
+<h2 id='new'>new</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">newObject</span> <span class="o">=</span> <span class="nx">model</span><span class="p">.</span><span class="k">new</span><span class="p">()</span>
+<span class="nx">newObject</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">'Active'</span>
+<span class="nx">newObject</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="cm">/* created grunt! */</span><span class="p">)</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Example of passing in some starting fields</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<pre class="highlight javascript"><code><span class="c1">// these fields will still need to pass validation of the schema</span>
+<span class="kr">const</span> <span class="nx">newObject</span> <span class="o">=</span> <span class="nx">model</span><span class="p">.</span><span class="k">new</span><span class="p">({</span>
+  <span class="na">status</span><span class="p">:</span> <span class="s1">'Active'</span>
+<span class="p">})</span>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="nx">newObject</span><span class="p">.</span><span class="nx">save</span><span class="p">().</span><span class="nx">then</span><span class="p">(...)</span>
+</code></pre>
+<p>Creates an instance of a grunt. This is one way of creating salesforce objects on the fly or doing a direct update of an object without querying for it first. When calling <code>save()</code> on a grunt if it&#39;s given an <code>id</code> field it will do an update. Otherwise it will attempt to create the object.</p>
+<h3 id='arguments-6'>Arguments</h3>
+<ul>
+<li><code>fields</code> (object) [optional] - fields to add to grunt after creating it</li>
+</ul>
+<h3 id='return-value-6'>Return Value</h3>
+<p><a href="#grunt">grunt</a> instance</p>
+<h2 id='find'>find</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'*'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">exec</span><span class="p">()</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Passing in where clause</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
-<h1 id='errors'>Errors</h1>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="s1">'account.lastName'</span><span class="p">:</span> <span class="s1">'Rollins'</span> <span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>Same as doing:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">where</span><span class="p">({</span> <span class="s1">'account.lastName'</span><span class="p">:</span> <span class="s1">'Rollins'</span> <span class="p">})</span>
+</code></pre>
+<p>Kicks off a query. Optional where clause options can be passed to find.</p>
+<h3 id='arguments-7'>Arguments</h3>
+<ul>
+<li><code>whereClauses</code> (object) [optional] - passes object into query as where clauses</li>
+</ul>
+<h3 id='return-value-7'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+<h2 id='findone'>findOne</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span> <span class="na">isActive</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>Same as doing</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">isActive</span><span class="p">:</span> <span class="kc">true</span> <span class="p">}).</span><span class="nx">first</span><span class="p">()</span>
+</code></pre>
+<p>Shorthand that exists for calling a query that is only looking for an individual record back</p>
+<h3 id='arguments-8'>Arguments</h3>
+<ul>
+<li><code>whereClauses</code> (object) [optional] - passes object into query as where clauses</li>
+</ul>
+<h3 id='return-value-8'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+<h2 id='findbyid'>findById</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="s1">'1'</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>Same as doing:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">where</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="s1">'1'</span> <span class="p">}).</span><span class="nx">first</span><span class="p">()</span>
+</code></pre>
+<p>Kicks off a query. Returns a single result, if one is found.</p>
+<h3 id='arguments-9'>Arguments</h3>
+<ul>
+<li><code>id</code> (string) - id of model to be searched for</li>
+</ul>
+<h3 id='return-value-9'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+<h2 id='findbyids'>findByIds</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">findByIds</span><span class="p">([</span> <span class="s1">'1'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="s1">'3'</span> <span class="p">])</span>
+</code></pre>
+<blockquote>
+<p>Same as doing:</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">where</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="p">[</span> <span class="s1">'1'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="s1">'3'</span> <span class="p">]})</span>
+</code></pre>
+<p>Kicks off a query searching for objects from a collection of ids.</p>
+<h3 id='arguments-10'>Arguments</h3>
+<ul>
+<li><code>ids</code> [array] - ids to search for</li>
+</ul>
+<h3 id='return-value-10'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+<h1 id='query'>Query</h1>
+<p>Queries are created by calling any of the find methods on a model <code>find, findById, findByIds</code> and have many methods to shape your request. Besides any of the methods that execute a query (<code>then, exec, execute</code>) query methods can be called in any order. Also must query functions state is cumulative. Calling <a href="#select">select</a>, <a href="#where">where</a>, or <a href="#with">with</a> keeps adding to the same state instead of wiping it out everytime. You can use this to your advantage to build highly <a href="#composable">composable  </a> queries.</p>
+<h2 id='select'>select</h2>
+<blockquote>
+<p>All call signatures</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="c1">// as positional arguments</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'isDeleted'</span><span class="p">,</span> <span class="s1">'status'</span><span class="p">,</span> <span class="s1">'contract.created'</span><span class="p">)</span>
+
+<span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="c1">// as array</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">([</span> <span class="s1">'id'</span><span class="p">,</span> <span class="s1">'isDeleted'</span><span class="p">,</span> <span class="s1">'status'</span><span class="p">,</span> <span class="s1">'contract.created'</span> <span class="p">])</span>
+
+<span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="c1">// as single string of comma delimited fields</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'id, isDeleted, status, contract.created'</span><span class="p">)</span>
+</code></pre>
+<p>Selects the fields you want returned in a query.</p>
+<h3 id='arguments-11'>Arguments</h3>
+<ul>
+<li><code>fields</code> (array | string) - fields you would like returned</li>
+</ul>
+<h3 id='return-value-11'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+<h2 id='fields'>fields</h2>
+<p>alias for <a href="#select">select</a></p>
+<h2 id='where'>where</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">where</span><span class="p">({</span>
+    <span class="na">status</span><span class="p">:</span> <span class="s1">'Active'</span><span class="p">,</span>
+    <span class="na">isDeleted</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>Also accepts a RAW SOQL String</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">// keep in mind this needs to be the Salesforce naming of fields</span>
+<span class="c1">// this is good for some edge case queries like one below</span>
+<span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="s2">"DISTANCE(Location__c, GEOLOCATION(37.775,-122.418), 'mi') &lt; 20"</span><span class="p">)</span>
+</code></pre>
+<p>Adds where clauses to the query.</p>
+<h3 id='arguments-12'>Arguments</h3>
+<ul>
+<li><code>clauses</code> (object | string) - clauses to add to query</li>
+</ul>
+<h3 id='return-value-12'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+
+<aside class="warning">
+If <code>clauses</code> is a string it gets passed straight to JSForce and no mapping will happen on fields contained within.
+</aside>
+<h2 id='limit'>limit</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">limit</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre>
+<p>Sets a limit on the query.</p>
+<h3 id='arguments-13'>Arguments</h3>
+<ul>
+<li><code>amount</code> (number) - The number of results to limit the query to</li>
+</ul>
+<h3 id='return-value-13'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+<h2 id='skip'>skip</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">skip</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre>
+<p>Sets up a skip on query.</p>
+<h3 id='arguments-14'>Arguments</h3>
+<ul>
+<li><code>amount</code> (number) - Amount to skip in query</li>
+</ul>
+<h3 id='return-value-14'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+<h2 id='offset'>offset</h2>
+<p>alias to <a href="#skip">skip</a></p>
+<h2 id='sort'>sort</h2>
+<blockquote>
+<p>minus in front of field signifys descending order</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="s1">'-createdDate status'</span><span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>Other signatures</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">sort</span><span class="p">({</span> <span class="na">createdData</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="na">status</span><span class="p">:</span> <span class="mi">1</span> <span class="p">})</span>
+</code></pre>
+<p>Sets up sorting of query.</p>
+<h3 id='arguments-15'>Arguments</h3>
+<ul>
+<li><code>sort</code> (object | string) - opts for how to sort</li>
+</ul>
+<h3 id='return-value-15'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+<h2 id='first'>first</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">first</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>Executing the query does something similar to</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">exec</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">results</span> <span class="o">=&gt;</span> <span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre>
+<p>Sets the query state that you only want the first result that comes back. This makes the return a single value instead of an array.</p>
+<h3 id='arguments-16'>Arguments</h3>
+<p>None</p>
+<h3 id='return-value-16'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+<h2 id='with'>with</h2>
+<blockquote>
+<p>As positional arguments</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="s1">'Suspended'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'*'</span><span class="p">)</span>
+  <span class="c1">// with this syntax you would have to call `with` multiple times</span>
+  <span class="c1">// to fetch multiple associations</span>
+  <span class="p">.</span><span class="kd">with</span><span class="p">(</span><span class="s1">'association'</span><span class="p">,</span> <span class="nx">associationQuery</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// notice we don't call any of the functions to start query</span>
+    <span class="c1">// Arbiter does this for you when it is ready to do query</span>
+    <span class="nx">associationQuery</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'field, anotherField, yetAnotherField'</span><span class="p">)</span>
+  <span class="p">})</span>
+</code></pre>
+<blockquote>
+<p>As an object to with</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="s1">'Active'</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'*'</span><span class="p">)</span>
+  <span class="p">.</span><span class="kd">with</span><span class="p">({</span>
+    <span class="c1">// you can pass multiple associations here too if you need to</span>
+    <span class="nx">association</span> <span class="p">(</span><span class="nx">associationQuery</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">associationQuery</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'field, anotherField, yetAnotherField'</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+</code></pre>
+<p>Sets up an association query to be called once outer query has executed. The associations that you can fetch go hand in hand with the associations that have been configured on the models with <a href="#setassociations"><code>setAssociations()</code></a>.</p>
+
+<p>These are very powerful for joining together objects that you normally can&#39;t query through in a regular SOQL query. Also they can be nested, since the query function for an association is just creating a query instance the entire query api is available to you. The only things that aren&#39;t would be the functions to execute the inner queries since Arbiter will need to do that once it is ready.</p>
+
+<p>Two apis exist for calling <code>with</code>. The <code>with(associationName, queryCB)</code> style and the <code>with(asocciationObject)</code> style. The <code>associationObject</code> style might be better if you need to fetch multiple associations but that is always possible with the other style as long as you call <code>with</code> multiple times.</p>
+<h3 id='arguments-17'>Arguments</h3><h4 id='2-argument-version'>2 argument version</h4>
+<ul>
+<li><code>associationName</code> (string) - the name of the association to fetch as configured on model</li>
+<li><code>queryCB</code> (function) [optional] - the query to filter and modify the association query. Not specifying filters or fields will simply return ids for nested queries</li>
+</ul>
+<h3 id='object-style'>Object style</h3>
+<ul>
+<li><code>associationsConfig</code> (object) - the associations to fetch and functions to call for associations
+
+<ul>
+<li><code>association</code> (string) - name of association to fetch as configured on model
+
+<ul>
+<li><code>queryCB</code> (function) - the query to filter and modify the association query. Not specifying filters or fields will simply return ids for nested queries</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id='throwifnotfound'>throwIfNotFound</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">throwIfNotFound</span><span class="p">()</span>
+</code></pre>
+<blockquote>
+<p>Handles when query is on a single value or an array of values</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">// when query would maybe return one thing</span>
+<span class="nx">model</span><span class="p">.</span><span class="nx">findOne</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">throwIfNotFound</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'whoops'</span><span class="p">))</span>
+
+<span class="c1">// or when query returns multiple things</span>
+<span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">throwIfNotFound</span><span class="p">(</span><span class="s1">'error message'</span><span class="p">)</span>
+</code></pre>
+<p>Helper for handling when query might return an empty array or null for a query. Doing so will cause the query to return a rejected promise. This covers some edge cases that can happen when you are operating on data in your <code>.then()</code> not realizing that the query returned no results.</p>
+<h3 id='arguments-18'>Arguments</h3>
+<ul>
+<li><code>error</code> (error | string | undefined) - What error to throw. If <code>undefined</code> is passed the default message for the thrown error is <code>[Model.name] not found</code></li>
+</ul>
+<h3 id='return-value-17'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+<h2 id='allowmutations'>allowMutations</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="c1">// assuming that status is a writable field</span>
+  <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">'status'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">allowMuations</span><span class="p">([</span><span class="s1">'status'</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">grunt</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">grunt</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s1">'something new'</span>
+    <span class="c1">// any other updates that are writable in schema would fail</span>
+    <span class="k">return</span> <span class="nx">grunt</span><span class="p">.</span><span class="nx">save</span><span class="p">()</span>
+  <span class="p">})</span>
+</code></pre>
+<p>Configures the returned grunts to allow mutations on only certain fields. The fields that are passed must be listed as writable in the schema. This is handy for sanitizing queries and restricting writes to certain values that are writable some of the time but you need to protect at other times</p>
+<h3 id='arguments-19'>Arguments</h3>
+<ul>
+<li><code>mutations</code> (array) - fields to allow mutations on</li>
+</ul>
+<h3 id='return-value-18'>Return Value</h3>
+<p><a href="#query">query</a> instance</p>
+
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+  The fields that you allow don't have to be present on the results that come back from the query
 </aside>
+<h2 id='rejectmuations'>rejectMuations</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">rejectMutations</span><span class="p">([</span><span class="s1">'status'</span><span class="p">])</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">grunt</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// cannot change status even if listed as writable in schema</span>
+  <span class="p">})</span>
+</code></pre>
+<p>The inverse of <a href="#allowmutations">allowMuations</a> use which ever one is easier to describe the fields you want to allow or reject field mutations in the query</p>
+<h3 id='arguments-20'>Arguments</h3>
+<ul>
+<li><code>mutations</code> (array) - fields to not allow modification of on grunt</li>
+</ul>
 
-<p>The Kittn API uses the following error codes:</p>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
-</tr>
-</tbody></table>
+<aside class="notice">
+  The fields that you restrict don't have to be present on the results that come back from the query
+</aside>
+<h2 id='execute'>execute</h2><pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">execute</span><span class="p">()</span>
+</code></pre>
+<p>Triggers a query to get executed. All of the state built up to this point gets turned into a query and sent over connection</p>
+<h3 id='arguments-21'>Arguments</h3>
+<p>None</p>
+<h3 id='return-value-19'>Return Value</h3>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">Promise</a></p>
+<h2 id='exec'>exec</h2>
+<p>alias for <a href="#execute">execute</a></p>
+<h2 id='then'>then</h2>
+<blockquote>
+<p>Make query promise like</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">model</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">onSuccessFn</span><span class="p">,</span> <span class="nx">onRejectFn</span><span class="p">)</span>
+</code></pre>
+<p>alias for <a href="#execute"><code>execute</code></a> except for that it allows passing of success and reject handlers for the query. This makes the query conform to a promise interface</p>
+<h3 id='arguments-22'>Arguments</h3>
+<ul>
+<li><code>successHandler</code> (function) - function to call on successful query</li>
+<li><code>errorHandler</code> (function) [optional] - function to call on unsuccessful query</li>
+</ul>
+<h3 id='return-value-20'>Return Value</h3>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank">Promise</a></p>
 
       </div>
       <div class="dark-box">
