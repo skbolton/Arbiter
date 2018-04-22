@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Arbiter-Salesforce</title>
+    <title>arbiter</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
 
     <style>
@@ -263,6 +263,9 @@
                   <li>
                     <a href="#composable-queries" class="toc-h2 toc-link" data-title="composable-queries">Composable queries</a>
                   </li>
+                  <li>
+                    <a href="#reusable-schemas" class="toc-h2 toc-link" data-title="reusable-schemas">Reusable Schemas</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -371,9 +374,9 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p><img src="https://img.shields.io/npm/v/arbiter-salesforce.svg" alt="npm" /><a href="https://coveralls.io/github/skbolton/Arbiter?branch=2.0"><img src="https://coveralls.io/repos/github/skbolton/Arbiter/badge.svg?branch=2.0" alt="Coverage Status" /></a><img src="https://travis-ci.org/skbolton/Arbiter.svg?branch=2.0" alt="Build" /></p>
+<p><img src="https://img.shields.io/npm/v/arbiter.svg" alt="npm" /><a href="https://coveralls.io/github/skbolton/Arbiter?branch=2.0"><img src="https://coveralls.io/repos/github/skbolton/Arbiter/badge.svg?branch=2.0" alt="Coverage Status" /></a><img src="https://travis-ci.org/skbolton/Arbiter.svg?branch=2.0" alt="Build" /></p>
 
-<p><a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a></p>
+<p><a href="https://github.com/skbolton/Arbiter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a></p>
 
 <p>Arbiter is a <a href="https://www.salesforce.com/" target="_blank">Salesforce</a> ORM for <a href="https://nodejs.org" target="_blank">Nodejs</a> with the goal of making modeling and querying Salesforce as painless as possible. With powerful schemas for validation and field remappings, Arbiter is the perfect layer to have between you and Salesforce.</p>
 
@@ -401,10 +404,10 @@
 <blockquote>
 <p>-S is a shorthand for --save</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>npm install -S arbiter-salesforce
+<pre class="highlight shell tab-shell"><code>npm install -S arbiter
 </code></pre>
 <p>Install using either npm or yarn.</p>
-<h2 id='define'>Define</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+<h2 id='define'>Define</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter'</span><span class="p">)</span>
 <span class="kr">const</span> <span class="p">{</span> <span class="nx">Schema</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">arbiter</span>
 
 <span class="nx">arbiter</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
@@ -488,7 +491,7 @@
 <p>Schemas are the driving force behind how Arbiter queries work so they deserve to be talked about first. Simply put, they are mappings of fields from how you want to reference them to the actual name of the field in Salesforce. Beyond that you can configure them to allow updates and validations on fields.</p>
 
 <aside class="notice">
-Arbiter internally needs to references id's so schemas will automatically add <code>id: Id</code> for you.
+Arbiter internally needs to references id's so schemas will automatically add <code>id: Id</code> for you. This also means that you will not be able to do your own mappings when it comes to ids.
 </aside>
 
 <p>The first argument when creating a schema is the name of the Salesforce object that will be queried. At nested levels the name is how the parent schema references that object. The second argument is the mappings for the fields you want to be able to query. Once you have defined the mapping, you <strong>never</strong> reference the field by its Salesforce name again. Arbiter takes care of mapping to the real value behind the scenes for you. You can also only query for fields that you have defined in your schema.</p>
@@ -738,7 +741,7 @@ Schemas are bypassed when doing raw JSForce queries. None of the validations or 
 <blockquote>
 <p>Raw connection object</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter'</span><span class="p">)</span>
 
 <span class="nx">arbiter</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">conn</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -764,7 +767,7 @@ Be sure to have your connection configured before trying to execute queries!
 <blockquote>
 <p>Returning the query instance for additional modification</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforc'</span><span class="p">)</span>
+<pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter'</span><span class="p">)</span>
 <span class="c1">// leaving out schema details for brevity</span>
 <span class="kr">const</span> <span class="nx">oppSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Case'</span><span class="p">,</span> <span class="p">{})</span>
 
@@ -782,10 +785,53 @@ Be sure to have your connection configured before trying to execute queries!
 </code></pre>
 <p>A lot of flexibility is available by leveraging the composabilty of queries. Since their state is cumulative you can accept outside input and add it to the query. We have also found that it is advantageous to not execute the query inside a function attached to the model. By returning the query you allow the outside world to attach more fields and other query state to shape the query different for their needs. Doing this will make a lot more of your queries reusable in other places in your app and trims down on code.</p>
 
+<p>At a minimum consider having all of your query functions accept a where clause argument. This is generally the part that makes one query unique over another or helps make queries more composable.</p>
+
 <p>This is not always possible and sometimes you have to execute queries in order to supply the right data or maybe you don&#39;t want the abstraction of the query to show up outside of the model. But if you find yourself seeing an existing query that is very close to what you need consider changing your apis to this style and being more extensible.</p>
+<h2 id='reusable-schemas'>Reusable Schemas</h2>
+<blockquote>
+<p>Extract the field config into a seperate file</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">// opportunity.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'Name'</span><span class="p">,</span>
+  <span class="na">status</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">sf</span><span class="p">:</span> <span class="s1">'Status'</span><span class="p">,</span>
+    <span class="na">enum</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Active'</span><span class="p">,</span> <span class="s1">'Suspended'</span><span class="p">,</span> <span class="s1">'Inactive'</span><span class="p">],</span>
+    <span class="na">writable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">default</span><span class="p">:</span> <span class="s1">'Active'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// service.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'Name'</span><span class="p">,</span>
+  <span class="na">assignedTo</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">sf</span><span class="p">:</span> <span class="s1">'Assigned_To__c'</span><span class="p">,</span>
+    <span class="na">writable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">required</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// building the schema</span>
+<span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter'</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">opportunityConfig</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./opportunity'</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">serviceConfig</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./service'</span><span class="p">)</span>
+
+<span class="c1">// notice how we don't have to define the field configs here now</span>
+<span class="kr">const</span> <span class="nx">opportunitySchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opporunity'</span><span class="p">,</span> <span class="nx">opportunityConfig</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">serviceSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Service__c'</span><span class="p">,</span> <span class="nx">serviceConfig</span><span class="p">)</span>
+
+<span class="nx">opportunitySchema</span><span class="p">.</span><span class="nx">addChildSchema</span><span class="p">(</span><span class="s1">'service'</span><span class="p">,</span> <span class="nx">serviceSchema</span><span class="p">)</span>
+</code></pre>
+<p>There might come a point when working with Arbiter when you have to use the same schema object in multiple schema trees. You could just redefine the schema fields and deal with the possiblilty of the two getting out of sync. Or what you can do is pull out the basic structure of each of your schemas into seperate files. Then require those files when you are building up your schema trees.</p>
+
+<p>This makes it so that you have a lot less schemas to write over and over and you can move much faster. It also means that you can no longer do a nested schema definition and you will need to the the <a href="#nested-schemas"><code>addChildSchema</code></a> api for building up the objects.</p>
+
+<p>This is optional but highly recommended since writing schema configs can be cumbersome and its nice to only have to do it once per object you will interface with.</p>
 <h1 id='api-reference'>API Reference</h1><h1 id='arbiter'>Arbiter</h1>
 <p>The main import of the library houses the manager of the connection to Salesforce as well as a place to define Schemas and models. It is also where you go to kick off a JSForce query.</p>
-<h2 id='configure'>configure</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+<h2 id='configure'>configure</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter'</span><span class="p">)</span>
 <span class="c1">// showing required fields</span>
 <span class="nx">arbiter</span><span class="p">.</span><span class="nx">configure</span><span class="p">({</span>
   <span class="na">username</span><span class="p">:</span> <span class="s1">'Johnny English'</span><span class="p">,</span>
@@ -813,7 +859,7 @@ Be sure to have your connection configured before trying to execute queries!
 </ul>
 <h3 id='return-value'>Return Value</h3>
 <p><code>undefined</code></p>
-<h2 id='getconnection'>getConnection</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+<h2 id='getconnection'>getConnection</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter'</span><span class="p">)</span>
 
 <span class="nx">arbiter</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">conn</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -827,7 +873,7 @@ Be sure to have your connection configured before trying to execute queries!
 <p>None</p>
 <h3 id='return-value-2'>Return Value</h3>
 <p><a href="http://jsforce.github.io/jsforce/doc/Connection.html">JSForce</a> Connection instance</p>
-<h2 id='model'>model</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+<h2 id='model'>model</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter'</span><span class="p">)</span>
 
 <span class="kr">const</span> <span class="nx">schemaInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{...})</span>
 <span class="kr">const</span> <span class="nx">model</span> <span class="o">=</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">'SomeName'</span><span class="p">,</span> <span class="nx">schemaInstance</span><span class="p">)</span>
@@ -840,7 +886,7 @@ Be sure to have your connection configured before trying to execute queries!
 </ul>
 <h3 id='return-value-3'>Return Value</h3>
 <p><code>model</code></p>
-<h2 id='schema'>Schema</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter-salesforce'</span><span class="p">)</span>
+<h2 id='schema'>Schema</h2><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">arbiter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'arbiter'</span><span class="p">)</span>
 
 <span class="kr">const</span> <span class="nx">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">arbiter</span><span class="p">.</span><span class="nx">Schema</span><span class="p">(</span><span class="s1">'Opportunity'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">status</span><span class="p">:</span> <span class="p">{</span>
@@ -1028,7 +1074,7 @@ This is a raw JSForce connection and any queries done through this will not have
 <h3 id='return-value-10'>Return Value</h3>
 <p><a href="#query">query</a> instance</p>
 <h1 id='query'>Query</h1>
-<p>Queries are created by calling any of the find methods on a model <code>find, findById, findByIds</code> and have many methods to shape your request. Besides any of the methods that execute a query (<code>then, exec, execute</code>) query methods can be called in any order. Also must query functions state is cumulative. Calling <a href="#select">select</a>, <a href="#where">where</a>, or <a href="#with">with</a> keeps adding to the same state instead of wiping it out everytime. You can use this to your advantage to build highly <a href="#composable">composable  </a> queries.</p>
+<p>Queries are created by calling any of the find methods on a model <code>find, findById, findByIds</code> and have many methods to shape your request. Besides any of the methods that execute a query (<code>then, exec, execute</code>) query methods can be called in any order. Also most query functions state is cumulative. Calling <a href="#select">select</a>, <a href="#where">where</a>, or <a href="#with">with</a> keeps adding to the same state instead of wiping it out everytime. You can use this to your advantage to build highly <a href="#composable">composable</a> queries.</p>
 <h2 id='select'>select</h2>
 <blockquote>
 <p>All call signatures</p>
