@@ -2,8 +2,6 @@
 
 ![npm](https://img.shields.io/npm/v/arbiter-salesforce.svg)[![Coverage Status](https://coveralls.io/repos/github/skbolton/Arbiter/badge.svg?branch=2.0)](https://coveralls.io/github/skbolton/Arbiter?branch=2.0)![Build](https://travis-ci.org/skbolton/Arbiter.svg?branch=2.0)
 
-<a href="https://github.com/skbolton/arbiter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
-
 Arbiter is a <a href="https://www.salesforce.com/" target="_blank">Salesforce</a> ORM for <a href="https://nodejs.org" target="_blank">Nodejs</a> with the goal of making modeling and querying Salesforce as painless as possible. With powerful schemas for validation and field remappings, Arbiter is the perfect layer to have between you and Salesforce.
 
 Arbiter is built on top of the popular <a href="https://jsforce.github.io/" target="_blank">JSforce</a> query library. People familiar with its api will feel right at home in Arbiter since most of the api is mirrored. Also, JSForce <a href="https://jsforce.github.io/document/#query" target="_blank">connection</a> objects are exposed providing escape hatches when needed, or an eased migration to Arbiter.
