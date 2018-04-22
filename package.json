@@ -1,6 +1,6 @@
 {
   "name": "arbiter",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "A Salesforce ORM powered by jsforce",
   "main": "index.js",
   "tonicExample": "const arbiter = require('arbiter')",
