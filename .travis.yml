@@ -1,0 +1,12 @@
+language: node_js
+
+node_js:
+  - '6'
+  - '7'
+  - '8'
+
+script:
+  - npm run test:all -- --coverage
+
+after_script:
+  - npm run coveralls

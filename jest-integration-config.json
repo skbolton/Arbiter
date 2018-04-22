@@ -1,0 +1,9 @@
+{
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "/__test__/",
+    "/tests"
+  ],
+  "testRegex": "(/test/.*(test|spec))\\.jsx?$",
+  "clearMocks": true
+}
