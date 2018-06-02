@@ -1,6 +1,6 @@
 # Arbiter
 
-![npm](https://img.shields.io/npm/v/arbiter-salesforce.svg)[![Coverage Status](https://coveralls.io/repos/github/skbolton/Arbiter/badge.svg?branch=master)](https://coveralls.io/github/skbolton/Arbiter?branch=2.0)![Build](https://travis-ci.org/skbolton/Arbiter.svg?branch=2.0)
+![npm](https://img.shields.io/npm/v/arbiter.svg)[![Coverage Status](https://coveralls.io/repos/github/skbolton/Arbiter/badge.svg?branch=master)](https://coveralls.io/github/skbolton/Arbiter?branch=master)![Build](https://travis-ci.org/skbolton/Arbiter.svg?branch=master)
 
 Arbiter is a <a href="https://www.salesforce.com/" target="_blank">Salesforce</a> ORM for <a href="https://nodejs.org" target="_blank">Nodejs</a> with the goal of making modeling and querying Salesforce as painless as possible. With powerful schemas for validation and field remappings, Arbiter is the perfect layer to have between you and Salesforce.
 
@@ -8,10 +8,10 @@ Arbiter is built on top of the popular <a href="https://jsforce.github.io/" targ
 
 What you get with Arbiter:
 
-* **A Declarative way of defining models and [associations](#associations) between them**
+* **A Declarative way of defining models and [associations](https://skbolton.github.io/Arbiter#associations) between them**
 * **Extended query building API**. JSForce with more helpers
 * **Field remappings.** No longer are you tied to your Salesforce field names. Create your own that are easier to reason about or matches your problem domain. __Or just to strip out those darn underscores...__
-* [**Smart query results**](#grunts). Makes updating and creating new objects quick and easy
+* [**Smart query results**](https://skbolton.github.io/Arbiter#grunts). Makes updating and creating new objects quick and easy
 * **Optional field validation and defaults**
 
 What Arbiter **doesn't** give you:
