@@ -6,10 +6,14 @@
  * This will attempt to get the following path opportunity -> project -> proposal. In example we are going to respond with no project which will make proposal missing as well
  */
 const setup = require('./setup')
-const Opportunity = require('./models/opportunity')
 const nockQuery = require('./nocks/query')
+const OpportunityCurry = require('./models/opportunity')
 
-beforeAll(() => setup())
+let Opportunity
+beforeAll(() => {
+  const arbiter = setup()
+  Opportunity = OpportunityCurry(arbiter)
+})
 
 it('scaffolds out all objects even if response does not have them', () => {
   const response = {

@@ -7,10 +7,14 @@
 
 const setup = require('./setup')
 const nockQuery = require('./nocks/query')
-const Case = require('./models/case')
+const CaseCurry = require('./models/case')
 
 describe('allow and reject mutations', () => {
-  beforeAll(setup)
+  let Case
+  beforeAll(() => {
+    const arbiter = setup()
+    Case = CaseCurry(arbiter)
+  })
 
   describe('allowMutations(mutations)', () => {
     it('rejects if field in mutations is not writable in schema', () => {

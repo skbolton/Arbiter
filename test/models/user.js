@@ -1,11 +1,17 @@
-const arbiter = require('../../index')
-const { Schema } = arbiter
+const { Schema } = require('../../index')
 
 const userSchema = new Schema('User', {
   firstName: 'FirstName',
   lastName: 'LastName'
 })
 
-const User = arbiter.model('User', userSchema)
+module.exports = (arbiter) => {
+  const model = arbiter.getModel('User');
+  if (model) {
+    return model;
+  }
 
-module.exports = User
+  const User = arbiter.model('User', userSchema)
+
+  return User
+}

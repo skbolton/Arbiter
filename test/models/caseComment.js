@@ -1,5 +1,4 @@
-const arbiter = require('../../index')
-const { Schema } = arbiter
+const { Schema } = require('../../index')
 
 const caseCommentSchema = new Schema('CaseComment', {
   comment: 'CommentBody',
@@ -7,15 +6,22 @@ const caseCommentSchema = new Schema('CaseComment', {
   case: 'ParentId'
 })
 
-const CaseComment = arbiter.model('CaseComment', caseCommentSchema)
-
-CaseComment.setAssociations({
-  owner: {
-    from: 'createdById',
-    to: 'id',
-    relation: CaseComment.relations.hasOne,
-    model: require('./user')
+module.exports = (arbiter) => {
+  const model = arbiter.getModel('CaseComment');
+  if (model) {
+    return model;
   }
-})
 
-module.exports = CaseComment
+  const CaseComment = arbiter.model('CaseComment', caseCommentSchema)
+
+  CaseComment.setAssociations({
+    owner: {
+      from: 'createdById',
+      to: 'id',
+      relation: CaseComment.relations.hasOne,
+      model: require('./user')(arbiter)
+    }
+  })
+
+  return CaseComment
+}

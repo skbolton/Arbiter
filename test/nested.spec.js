@@ -4,9 +4,13 @@
 
 const setup = require('./setup')
 const nockQuery = require('./nocks/query')
-const Opportunity = require('./models/opportunity')
+const OpportunityCurry = require('./models/opportunity')
 
-beforeAll(setup)
+let Opportunity
+beforeAll(() => {
+  const arbiter = setup()
+  Opportunity = OpportunityCurry(arbiter)
+})
 
 test('should map the values correctly based on schema', () => {
   const oppId = '1'

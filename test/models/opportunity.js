@@ -1,5 +1,4 @@
-const arbiter = require('../../index')
-const { Schema } = arbiter
+const { Schema } = require('../../index')
 
 const oppSchema = new Schema('Opportunity', {
   name: 'Name',
@@ -15,15 +14,22 @@ const oppSchema = new Schema('Opportunity', {
   })
 })
 
-const Opportunity = arbiter.model('Opportunity', oppSchema)
-
-Opportunity.setAssociations({
-  lineItems: {
-    from: 'id',
-    to: 'oppId',
-    relation: Opportunity.relations.hasMany,
-    model: require('./lineItem')
+module.exports = (arbiter) => {
+  const model = arbiter.getModel('Opportunity');
+  if (model) {
+    return model;
   }
-})
 
-module.exports = Opportunity
+  const Opportunity = arbiter.model('Opportunity', oppSchema)
+
+  Opportunity.setAssociations({
+    lineItems: {
+      from: 'id',
+      to: 'oppId',
+      relation: Opportunity.relations.hasMany,
+      model: require('./lineItem')(arbiter)
+    }
+  })
+
+  return Opportunity
+}

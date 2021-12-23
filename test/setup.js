@@ -1,4 +1,4 @@
-const arbiter = require('../index')
+const { Connection, Model, Arbiter } = require('../index')
 const { loginUrl } = require('./connection-vars')
 const login = require('./nocks/login')
 
@@ -15,10 +15,14 @@ module.exports = () => {
   // mock login respons
   login()
 
+  const arbiter = new Arbiter(Connection, Model);
+
   // set up connection
   arbiter.configure({
     connection,
     username: 'Johnny English',
     password: 'Secret_Agent_Man'
   })
+
+  return arbiter
 }

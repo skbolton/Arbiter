@@ -1,5 +1,4 @@
-const arbiter = require('../../index')
-const { Schema } = arbiter
+const { Schema } = require('../../index')
 
 const lineItemsSchema = new Schema('OpportunityLineItem', {
   name: 'Name',
@@ -7,6 +6,13 @@ const lineItemsSchema = new Schema('OpportunityLineItem', {
   description: 'Description'
 })
 
-const LineItem = arbiter.model('LineItem', lineItemsSchema)
+module.exports = (arbiter) => {
+  const model = arbiter.getModel('LineItem');
+  if (model) {
+    return model;
+  }
 
-module.exports = LineItem
+  const LineItem = arbiter.model('LineItem', lineItemsSchema)
+
+  return LineItem
+}

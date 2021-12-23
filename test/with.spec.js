@@ -11,9 +11,13 @@
 
 const setup = require('./setup')
 const nockQuery = require('./nocks/query')
-const Case = require('./models/case')
+const CaseCurry = require('./models/case')
 
-beforeAll(setup)
+let Case
+beforeAll(() => {
+  const arbiter = setup()
+  Case = CaseCurry(arbiter)
+})
 
 const case1 = {
   Id: 'case1'

@@ -6,10 +6,16 @@
 
 const setup = require('./setup')
 const nockQuery = require('./nocks/query')
-const Case = require('./models/case')
-const CaseComment = require('./models/caseComment')
+const CaseCurry = require('./models/case')
+const CaseCommentCurry = require('./models/caseComment')
 
-beforeAll(setup)
+let Case
+let CaseComment
+beforeAll(() => {
+  const arbiter = setup()
+  Case = CaseCurry(arbiter)
+  CaseComment = CaseCommentCurry(arbiter)
+})
 
 it('create grunt which can be saved', () => {
   nockQuery.create('Case')
